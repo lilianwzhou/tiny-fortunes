@@ -10,19 +10,26 @@
 # code
 
 # Definition for singly-linked list.
+import math 
+
+
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
 class Solution:
     def middleNode(self, head: ListNode) -> ListNode:
-
-        # TODO: just like always u fill in the function
-
-        # Delete this line first, just here to silence syntax errors since the function
-        # requires a listnode out
-        return ListNode(0)
-
+        length = 0
+        traverseNode = head 
+        while traverseNode != None: 
+            length += 1
+            traverseNode = traverseNode.next 
+        middle = length // 2
+        traverseNode = head
+        for _ in range(middle): 
+            traverseNode = traverseNode.next 
+        return traverseNode
+        
 
 # Then to test u would like make cases down here/run through your head and once you are sure
 # enough about ur solution then you would copy paste 16 -> 23 and dump into leetcode and run it against their tests
@@ -31,7 +38,7 @@ class Solution:
 
 # Example test case for this question -> you would make a couple of these just to see if ur solution works like you thought
 
-# create a linked list 1->2->3
+# create a linked list 1->2->3 
 nodeOne = ListNode(1)
 nodeTwo = ListNode(2)
 nodeThree = ListNode(3)
@@ -48,6 +55,34 @@ if test.val == 2:
 else:
     print(f"We fucked up and got {test.val}")
     print(test)
+
+# empty linked list! 
+empty_test = Solution().middleNode(None)
+if empty_test is None: 
+    print("Success for empty test")
+else: 
+    print("fail")
+
+# one element linked list 1
+test = Solution().middleNode(ListNode(1))
+if test.val == 1:
+    print("Success for one element list")
+else:
+    print(f"We fucked up and got {test.val}")
+    print(test)
+
+# even list 1->2->3->4 
+nodeFour = ListNode(4)
+nodeThree.next = nodeFour
+
+test = Solution().middleNode(nodeOne)
+
+if test.val == 3:
+    print("Success for list 1->2->3->4")
+else:
+    print(f"We fucked up and got {test.val}")
+    print(test)
+
 
 # Then you would run this by the run button in the top right in VSCODE or you would open terminal to this leetcode folder
 # and do python3 monday-june-21.py, whichever is easier/works

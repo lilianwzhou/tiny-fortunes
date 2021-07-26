@@ -8,7 +8,7 @@ const port = 3000
 const validator = require("email-validator");
 const passwordValidator = require('password-validator');
 const argon2 = require('argon2');
-
+const shortUUID = require('short-uuid');
 // Create a schema
 var schema = new passwordValidator();
  
@@ -69,28 +69,29 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-
-/**
+  /**
  * @swagger
- * /users:
- *  get:
- *    summary: Get's all the users in the db
- *    responses:
- *      '200':
- *        description: All users with name, email, password, etc.
+ * /user:
  *  post:
  *    summary: Creates a new user
+ *    parameters:
+ *      - in: body
+ *        name: user
+ *        description: The user to create.
+ *        schema:
+ *          type: object
+ *          required:
+ *            - email
+ *            - password
+ *          properties:
+ *            email:
+ *              type: string
+ *            password:
+ *              type: string
  *    responses:
  *      '200':
  *        description: Get an ID back with the user..
  */
-app.get('/users', (req, res) => {
-    res.send({
-        name: "terry cruz"
-    })
-    console.log(req.query)
-  })
-
 app.post("/user", (req, res) => {
     console.log(req.body)
 
@@ -103,7 +104,7 @@ app.post("/user", (req, res) => {
       return
     }
 
-    if (!schema.validate(pass)) {
+    if (!schema.validate(req.body.password)) {
       res.status(400).send("Please provide a password > 8 characters and < than 100")
       return
     }

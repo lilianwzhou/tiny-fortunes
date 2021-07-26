@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E3095D8626AD05C900BD8869 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3095D8526AD05C900BD8869 /* CreateAccountViewController.swift */; };
+		E3095D8826AD05D800BD8869 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3095D8726AD05D800BD8869 /* AccountView.swift */; };
+		E3095D8B26AD1DED00BD8869 /* UITextFieldWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3095D8A26AD1DED00BD8869 /* UITextFieldWithPadding.swift */; };
+		E3095D8D26AD1F2200BD8869 /* UIFont+AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3095D8C26AD1F2200BD8869 /* UIFont+AppFonts.swift */; };
 		E30D6E9926A4E03200BED29F /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D6E9826A4E03200BED29F /* WelcomeViewController.swift */; };
 		E30D6E9B26A4E03A00BED29F /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D6E9A26A4E03A00BED29F /* WelcomeView.swift */; };
 		E30D6E9E26A4EED600BED29F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D6E9D26A4EED600BED29F /* LoginViewController.swift */; };
@@ -21,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E3095D8526AD05C900BD8869 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		E3095D8726AD05D800BD8869 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		E3095D8A26AD1DED00BD8869 /* UITextFieldWithPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldWithPadding.swift; sourceTree = "<group>"; };
+		E3095D8C26AD1F2200BD8869 /* UIFont+AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+AppFonts.swift"; sourceTree = "<group>"; };
 		E30D6E9826A4E03200BED29F /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		E30D6E9A26A4E03A00BED29F /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		E30D6E9D26A4EED600BED29F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -47,9 +55,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E3095D8426AD05A200BD8869 /* Create Account */ = {
+			isa = PBXGroup;
+			children = (
+				E3095D8526AD05C900BD8869 /* CreateAccountViewController.swift */,
+				E3095D8726AD05D800BD8869 /* AccountView.swift */,
+			);
+			path = "Create Account";
+			sourceTree = "<group>";
+		};
+		E3095D8926AD1DDE00BD8869 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				E3095D8A26AD1DED00BD8869 /* UITextFieldWithPadding.swift */,
+				E3095D8C26AD1F2200BD8869 /* UIFont+AppFonts.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		E30D6E9626A4E01500BED29F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E3095D8926AD1DDE00BD8869 /* Shared */,
+				E3095D8426AD05A200BD8869 /* Create Account */,
 				E30D6E9C26A4EEB700BED29F /* Login */,
 				E30D6E9726A4E01C00BED29F /* Welcome */,
 			);
@@ -191,11 +219,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3095D8826AD05D800BD8869 /* AccountView.swift in Sources */,
+				E3095D8626AD05C900BD8869 /* CreateAccountViewController.swift in Sources */,
 				E3E715982670618100CB4796 /* TestViewController.swift in Sources */,
 				E3E715962670617A00CB4796 /* TestView.swift in Sources */,
 				E3E7158426705B4800CB4796 /* ViewController.swift in Sources */,
+				E3095D8B26AD1DED00BD8869 /* UITextFieldWithPadding.swift in Sources */,
 				E30D6EA026A4EEE200BED29F /* LoginView.swift in Sources */,
 				E30D6E9926A4E03200BED29F /* WelcomeViewController.swift in Sources */,
+				E3095D8D26AD1F2200BD8869 /* UIFont+AppFonts.swift in Sources */,
 				E30D6E9E26A4EED600BED29F /* LoginViewController.swift in Sources */,
 				E3E7158026705B4800CB4796 /* AppDelegate.swift in Sources */,
 				E3E7158226705B4800CB4796 /* SceneDelegate.swift in Sources */,

@@ -9,7 +9,7 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
 
-    var customView: WelcomeView? {
+    private var customView: WelcomeView? {
         return self.view as? WelcomeView
     }
     
@@ -25,14 +25,17 @@ class WelcomeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         customView?.titleLabel.text = "Lol"
-
     }
    
-    @objc func createAccount() {
+    @objc private func createAccount() {
         // TODO: Present createAccountViewController
+        let createAccountVC = CreateAccountViewController()
+        navigationController?.pushViewController(createAccountVC, animated: true)
+//        present(createAccountVC, animated: true, completion: nil)
+        
     }
     
-    @objc func login() {
+    @objc private func login() {
         // TODO: Present loginViewController
         let loginVC = LoginViewController()
 //        present(loginVC, animated: true, completion: nil)

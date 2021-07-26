@@ -15,6 +15,6 @@ class LoginViewController: UIViewController {
     
     override func loadView() {
         self.view = LoginView()
-        
+        customView?.emailTextField.text = ""
     }
 }

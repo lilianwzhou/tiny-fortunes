@@ -1,11 +1,27 @@
 
 const express = require('express')
 const helmet = require('helmet');
-const bodyParser = require('body-parser');
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const app = express()
 const port = 3000
+const validator = require("email-validator");
+const passwordValidator = require('password-validator');
+const argon2 = require('argon2');
+
+// Create a schema
+var schema = new passwordValidator();
+ 
+// Add properties to it
+schema
+.is().min(8)                                    // Minimum length 8
+.is().max(100)                                  // Maximum length 100
+// .has().uppercase()                              // Must have uppercase letters
+// .has().lowercase()                              // Must have lowercase letters
+// .has().digits(2)                                // Must have at least 2 digits
+// .has().not().spaces()                           // Should not have spaces
+// .is().not().oneOf(['Passw0rd', 'Password123']); // Blacklist these values
+ 
 
 const swaggerOptions = {
     swaggerDefinition: {
@@ -22,7 +38,7 @@ const swaggerOptions = {
   
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
-app.use(bodyParser.json({limit: '5mb'}));
+app.use(express.json({limit: '5mb'}));
 app.use(helmet());
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
@@ -78,11 +94,25 @@ app.get('/users', (req, res) => {
 app.post("/user", (req, res) => {
     console.log(req.body)
 
-    // WRITE TO THE DB with the new user
-    // FIRST CHECK IF EMAIL already exists
-    //if it does, do a res.send("erromessage")
+    if(req.body.email === null || req.body.password == null) {
+      res.status(400).send("Provide an email and password")
+      return
+    }
+    if (!validator.validate(req.body.email)) {
+      res.status(400).send("Please provide a valid email")
+      return
+    }
+
+    if (!schema.validate(pass)) {
+      res.status(400).send("Please provide a password > 8 characters and < than 100")
+      return
+    }
+
+    hashedPassword = argon2.hash(req.body.password);
     res.statusCode = 401
-    res.send("Here")
+
+    id = shortUUID.generate();
+    res.status(200).send({id: id})
 })
 
 app.listen(port, () => {

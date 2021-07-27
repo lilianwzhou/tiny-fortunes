@@ -13,6 +13,7 @@ class CreateAccountViewController: UIViewController {
         return self.view as! AccountView
     }
     
+    
     override func loadView() {
         super.loadView()
         self.view = AccountView()
@@ -20,7 +21,7 @@ class CreateAccountViewController: UIViewController {
     
     override func viewDidLoad() {
         customView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        customView.createAccountButton.addTarget(self, action: #selector(createAccount), for: .touchUpInside)
+        customView.completeButton.addTarget(self, action: #selector(createAccount), for: .touchUpInside)
     
     }
     
@@ -31,13 +32,15 @@ class CreateAccountViewController: UIViewController {
     }
     
     @objc private func createAccount() {
-        
+    
         //with guard
         guard let email = customView.emailTextField.text, !email.isEmpty else {
             customView.emailTextField.layer.borderColor = UIColor.red.cgColor
             customView.emailTextField.layer.borderWidth = 3
             return
         }
+        customView.emailTextField.layer.borderWidth = 0
+
         
         //without guard -> no email variable
 //        if customView.emailTextField.text == nil || customView.emailTextField.text?.isEmpty == true {
@@ -51,17 +54,35 @@ class CreateAccountViewController: UIViewController {
             customView.passwordTextField.layer.borderWidth = 3
             return
         }
+        customView.passwordTextField.layer.borderWidth = 0
+        
+        
 
         //API CALL
-        guard let url = URL(string: "localhost:3000/user") else {
+        guard var request = Networking.getRequestFor(route: .user, method: .POST) else {
             return
         }
         
-        var request = URLRequest(url: url)
         
-        request.httpMethod = "POST" 
         
-        URLSession.shared.dataTask(with: request, completionHandler: { data, resp, error in
+//        JSONSerialization.data(withJSONObject: dict, options: [])
+        guard let encodedStuff = try? JSONEncoder().encode(User(email: email, password: password)) else {
+            return
+        }
+        
+        request.httpBody = encodedStuff
+        
+        request.allHTTPHeaderFields = ["Content-Type": "application/json"]
+        let dataTask = URLSession.shared.dataTask(with: request, completionHandler: { data, resp, error in
+            
+            DispatchQueue.main.async {
+                self.customView.showError(message: "THERE IS A FAT ERROR")
+            }
+            
+            if let data = data {
+                print(data)
+                print(String(data: data, encoding: .utf8))
+            }
             
             if let error = error {
                 print(error)
@@ -71,5 +92,7 @@ class CreateAccountViewController: UIViewController {
                 print(resp)
             }
         })
-        }
+        
+        dataTask.resume()
+    }
 }

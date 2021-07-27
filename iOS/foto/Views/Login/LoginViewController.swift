@@ -9,12 +9,15 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    var customView: LoginView? {
-        return self.view as? LoginView
+    var customView: AccountView? {
+        return self.view as? AccountView
     }
     
     override func loadView() {
-        self.view = LoginView()
-        customView?.emailTextField.text = ""
+        self.view = AccountView()
+    }
+    
+    override func viewDidLoad() {
+        customView?.completeButton.setTitle("Login", for: .normal)
     }
 }

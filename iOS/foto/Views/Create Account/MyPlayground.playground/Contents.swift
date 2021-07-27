@@ -50,9 +50,7 @@ func changebar(_ instance:B) {
 }
 
 
-func wtf(lol: String = "") {
-    
-}
+func wtf(lol: String = "")
 
 wtf()
 //changebar(ainstance)

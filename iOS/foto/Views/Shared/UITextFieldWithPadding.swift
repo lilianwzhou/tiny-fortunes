@@ -30,7 +30,7 @@ class UITextFieldWithPadding: UITextField {
     }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.insetBy(dx: horizontalPadding, dy: horizontalPadding)
+        return bounds.insetBy(dx: horizontalPadding, dy: 0)
     }
     
     override func editingRect(forBounds bounds: CGRect) -> CGRect {

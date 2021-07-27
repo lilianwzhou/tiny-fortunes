@@ -11,7 +11,10 @@ const argon2 = require('argon2');
 const shortUUID = require('short-uuid');
 // Create a schema
 var schema = new passwordValidator();
- 
+const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+const jwtSecret = 'My!@!Se3cr8tH4sh';
+
 // Add properties to it
 schema
 .is().min(8)                                    // Minimum length 8
@@ -22,6 +25,16 @@ schema
 // .has().not().spaces()                           // Should not have spaces
 // .is().not().oneOf(['Passw0rd', 'Password123']); // Blacklist these values
  
+var testUser = {
+  email: "blurp89@gmail.com",
+  password: "123456789"
+}
+
+argon2.hash("123456789").then((val) =>  {
+  testUser.password = val
+})
+
+var users = [testUser]
 
 const swaggerOptions = {
     swaggerDefinition: {
@@ -92,7 +105,7 @@ app.get('/', (req, res) => {
  *      '200':
  *        description: Get an ID back with the user..
  */
-app.post("/user", (req, res) => {
+app.post("/user", async (req, res) => {
     console.log(req.body)
 
     if(req.body.email === null || req.body.password == null) {
@@ -109,11 +122,74 @@ app.post("/user", (req, res) => {
       return
     }
 
-    hashedPassword = argon2.hash(req.body.password);
+    hashedPassword = await argon2.hash(req.body.password);
+    req.body.password = hashedPassword
+    users.push(req.body)
     res.statusCode = 401
 
     id = shortUUID.generate();
     res.status(200).send({id: id})
+})
+
+
+  /**
+ * @swagger
+ * /auth:
+ *  post:
+ *    summary: Gets a JWT for a user
+ *    parameters:
+ *      - in: body
+ *        name: user
+ *        description: The user to create.
+ *        schema:
+ *          type: object
+ *          required:
+ *            - email
+ *            - password
+ *          properties:
+ *            email:
+ *              type: string
+ *            password:
+ *              type: string
+ *    responses:
+ *      '200':
+ *        description: Get an auth token (JWT) that must be sent in future requests
+ */
+app.post("/auth", async (req, res) => {
+  if(req.body && req.body.email && req.body.password) {
+    let user = users.filter((value) => {
+      if(value.email === req.body.email) {
+        return true
+      }
+      return false
+    })
+    if(user && user.length === 1) {
+      user = user[0]
+      console.log(user)
+      let passwordHash = user.password;
+      if (await argon2.verify(passwordHash, req.body.password)) {
+          req.body = {
+              userId: user._id,
+              email: user.email,
+              provider: 'email',
+          };
+          try {
+            let salt = crypto.randomBytes(16).toString('base64');
+            req.body.refreshKey = salt;
+            let token = jwt.sign(req.body, jwtSecret, {expiresIn: 1000000000000000000});
+            return res.status(201).send({accessToken: token});
+          } catch (err) {
+            return res.status(500).send(err);
+          }
+      } else {
+          res.status(400).send({errors: `Invalid e-mail and/or password`});
+      }
+    } else {
+      res.status(400).send({errors: `User not found`});
+    }
+  } else {
+    res.status(400).send({error: 'Missing body fields: email, password'});
+  }
 })
 
 app.listen(port, () => {

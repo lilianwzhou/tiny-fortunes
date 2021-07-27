@@ -30,6 +30,8 @@ class AccountView: UIView {
     let emailTextField: UITextFieldWithPadding = {
         let textField = UITextFieldWithPadding(horizontalPadding: 20)
         textField.placeholder = "johnappleseed@gmailcom"
+        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -37,6 +39,8 @@ class AccountView: UIView {
     let passwordTextField: UITextFieldWithPadding = {
         let textField = UITextFieldWithPadding(horizontalPadding: 20)
         textField.placeholder = "supersecretawesomepassword"
+        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -59,7 +63,7 @@ class AccountView: UIView {
         return header
     }()
     
-    let createAccountButton: UIButton = {
+    let completeButton: UIButton = {
         let button = UIButton()
         button.setTitle("Create Account", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -80,6 +84,16 @@ class AccountView: UIView {
         return button
     }()
     
+    let errorLabel: UILabel = {
+        let error = UILabel()
+        error.textColor = .red
+        error.font = .appBodyFont
+        error.translatesAutoresizingMaskIntoConstraints = false
+        return error
+    }()
+    
+    private var errorHeightConstraint: NSLayoutConstraint?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
             
@@ -91,8 +105,9 @@ class AccountView: UIView {
         addSubview(passwordLabel)
         addSubview(passwordTextField)
         addSubview(sunImage)
-        addSubview(createAccountButton)
+        addSubview(completeButton)
         addSubview(backButton)
+        addSubview(errorLabel)
         
         print(subviews)
         NSLayoutConstraint.activate([
@@ -116,21 +131,43 @@ class AccountView: UIView {
             sunImage.bottomAnchor.constraint(equalTo: header.topAnchor, constant: 15),
             sunImage.heightAnchor.constraint(equalToConstant: 30),
             sunImage.widthAnchor.constraint(equalToConstant: 30),
-            createAccountButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 50),
-            createAccountButton.leadingAnchor.constraint(equalTo: emailLabel.leadingAnchor),
-            createAccountButton.trailingAnchor.constraint(equalTo: emailLabel.trailingAnchor),
-            createAccountButton.heightAnchor.constraint(equalToConstant: 50),
+            completeButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 50),
+            completeButton.leadingAnchor.constraint(equalTo: emailLabel.leadingAnchor),
+            completeButton.trailingAnchor.constraint(equalTo: emailLabel.trailingAnchor),
+            completeButton.heightAnchor.constraint(equalToConstant: 50),
             backButton.heightAnchor.constraint(equalToConstant: 70),
             backButton.widthAnchor.constraint(equalToConstant: 70),
             backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            backButton.topAnchor.constraint(equalTo: createAccountButton.bottomAnchor, constant: 52),
+            errorLabel.topAnchor.constraint(equalTo: completeButton.bottomAnchor, constant: 10),
+            errorLabel.leadingAnchor.constraint(equalTo: emailLabel.leadingAnchor),
+            backButton.topAnchor.constraint(equalTo: errorLabel.bottomAnchor, constant: 42)
         ])
+        
+        errorHeightConstraint = errorLabel.heightAnchor.constraint(equalToConstant: 0)
+        errorHeightConstraint?.isActive = true
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        addGestureRecognizer(gestureRecognizer)
      }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    
+    @objc private func dismissKeyboard() {
+        endEditing(true)
+    }
+    
+    func showError(message: String) {
+        errorLabel.text = message
+        errorHeightConstraint?.constant = 20
+        
+        UIView.animate(withDuration: 0.3) {
+            self.layoutIfNeeded()
+        }
+        
+    }
 }
 
 
@@ -138,7 +175,10 @@ import SwiftUI
 
 struct ControllerPreview: PreviewProvider {
     static var previews: some View {
-        ContainerView()
+        Group {
+            ContainerView()
+            ContainerView()
+        }
     }
     
     struct ContainerView: UIViewControllerRepresentable {

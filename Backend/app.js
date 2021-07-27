@@ -1,7 +1,6 @@
 
 const express = require('express')
 const helmet = require('helmet');
-const bodyParser = require('body-parser');
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const app = express()
@@ -22,22 +21,24 @@ const swaggerOptions = {
   
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
-app.use(bodyParser.json({limit: '5mb'}));
-app.use(helmet());
+app.use(express.json())
+
+// app.use(bodyParser.json({limit: '5mb'}));
+// app.use(helmet());
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-  res.header('Access-Control-Expose-Headers', 'Content-Length');
-  res.header('Access-Control-Allow-Headers', req.header('Access-Control-Request-Headers'));
-  if (req.method === 'OPTIONS') {
-      return res.status(200).send();
-  } else {
-      return next();
-  }
-});
+// app.use(function (req, res, next) {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Credentials', 'true');
+//   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+//   res.header('Access-Control-Expose-Headers', 'Content-Length');
+//   res.header('Access-Control-Allow-Headers', req.header('Access-Control-Request-Headers'));
+//   if (req.method === 'OPTIONS') {
+//       return res.status(200).send();
+//   } else {
+//       return next();
+//   }
+// });
 
 /**
  * @swagger
@@ -81,7 +82,7 @@ app.post("/user", (req, res) => {
     // WRITE TO THE DB with the new user
     // FIRST CHECK IF EMAIL already exists
     //if it does, do a res.send("erromessage")
-    res.statusCode = 401
+    res.statusCode = 200
     res.send("Here")
 })
 

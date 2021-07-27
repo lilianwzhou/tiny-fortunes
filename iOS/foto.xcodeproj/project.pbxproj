@@ -11,10 +11,11 @@
 		E3095D8826AD05D800BD8869 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3095D8726AD05D800BD8869 /* AccountView.swift */; };
 		E3095D8B26AD1DED00BD8869 /* UITextFieldWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3095D8A26AD1DED00BD8869 /* UITextFieldWithPadding.swift */; };
 		E3095D8D26AD1F2200BD8869 /* UIFont+AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3095D8C26AD1F2200BD8869 /* UIFont+AppFonts.swift */; };
+		E3095D8F26AE437C00BD8869 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3095D8E26AE437C00BD8869 /* Networking.swift */; };
+		E3095D9226AE497A00BD8869 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3095D9126AE497A00BD8869 /* User.swift */; };
 		E30D6E9926A4E03200BED29F /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D6E9826A4E03200BED29F /* WelcomeViewController.swift */; };
 		E30D6E9B26A4E03A00BED29F /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D6E9A26A4E03A00BED29F /* WelcomeView.swift */; };
 		E30D6E9E26A4EED600BED29F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D6E9D26A4EED600BED29F /* LoginViewController.swift */; };
-		E30D6EA026A4EEE200BED29F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D6E9F26A4EEE200BED29F /* LoginView.swift */; };
 		E3E7158026705B4800CB4796 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E7157F26705B4800CB4796 /* AppDelegate.swift */; };
 		E3E7158226705B4800CB4796 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E7158126705B4800CB4796 /* SceneDelegate.swift */; };
 		E3E7158426705B4800CB4796 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E7158326705B4800CB4796 /* ViewController.swift */; };
@@ -29,10 +30,11 @@
 		E3095D8726AD05D800BD8869 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		E3095D8A26AD1DED00BD8869 /* UITextFieldWithPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldWithPadding.swift; sourceTree = "<group>"; };
 		E3095D8C26AD1F2200BD8869 /* UIFont+AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+AppFonts.swift"; sourceTree = "<group>"; };
+		E3095D8E26AE437C00BD8869 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		E3095D9126AE497A00BD8869 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E30D6E9826A4E03200BED29F /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		E30D6E9A26A4E03A00BED29F /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		E30D6E9D26A4EED600BED29F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		E30D6E9F26A4EEE200BED29F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E3E7157C26705B4800CB4796 /* foto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = foto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3E7157F26705B4800CB4796 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3E7158126705B4800CB4796 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,10 +69,19 @@
 		E3095D8926AD1DDE00BD8869 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				E3095D8E26AE437C00BD8869 /* Networking.swift */,
 				E3095D8A26AD1DED00BD8869 /* UITextFieldWithPadding.swift */,
 				E3095D8C26AD1F2200BD8869 /* UIFont+AppFonts.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		E3095D9026AE497100BD8869 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E3095D9126AE497A00BD8869 /* User.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		E30D6E9626A4E01500BED29F /* Views */ = {
@@ -97,7 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				E30D6E9D26A4EED600BED29F /* LoginViewController.swift */,
-				E30D6E9F26A4EEE200BED29F /* LoginView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -121,6 +131,7 @@
 		E3E7157E26705B4800CB4796 /* foto */ = {
 			isa = PBXGroup;
 			children = (
+				E3095D9026AE497100BD8869 /* Models */,
 				E30D6E9626A4E01500BED29F /* Views */,
 				E3E715932670616600CB4796 /* TestViewController */,
 				E3E7157F26705B4800CB4796 /* AppDelegate.swift */,
@@ -225,13 +236,14 @@
 				E3E715962670617A00CB4796 /* TestView.swift in Sources */,
 				E3E7158426705B4800CB4796 /* ViewController.swift in Sources */,
 				E3095D8B26AD1DED00BD8869 /* UITextFieldWithPadding.swift in Sources */,
-				E30D6EA026A4EEE200BED29F /* LoginView.swift in Sources */,
 				E30D6E9926A4E03200BED29F /* WelcomeViewController.swift in Sources */,
+				E3095D9226AE497A00BD8869 /* User.swift in Sources */,
 				E3095D8D26AD1F2200BD8869 /* UIFont+AppFonts.swift in Sources */,
 				E30D6E9E26A4EED600BED29F /* LoginViewController.swift in Sources */,
 				E3E7158026705B4800CB4796 /* AppDelegate.swift in Sources */,
 				E3E7158226705B4800CB4796 /* SceneDelegate.swift in Sources */,
 				E30D6E9B26A4E03A00BED29F /* WelcomeView.swift in Sources */,
+				E3095D8F26AE437C00BD8869 /* Networking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

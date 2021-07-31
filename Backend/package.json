@@ -1,11 +1,13 @@
 {
   "dependencies": {
     "argon2": "^0.28.2",
+    "dotenv": "^10.0.0",
     "email-validator": "^2.0.4",
     "express": "^4.17.1",
     "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.3",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.12",
     "password-validator": "^5.1.1",
     "short-uuid": "^4.2.0",
@@ -14,5 +16,6 @@
   },
   "scripts": {
     "start": "nodemon app.js"
-  }
+  },
+  "type": "module"
 }

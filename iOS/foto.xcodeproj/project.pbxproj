@@ -16,6 +16,10 @@
 		E30D6E9926A4E03200BED29F /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D6E9826A4E03200BED29F /* WelcomeViewController.swift */; };
 		E30D6E9B26A4E03A00BED29F /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D6E9A26A4E03A00BED29F /* WelcomeView.swift */; };
 		E30D6E9E26A4EED600BED29F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D6E9D26A4EED600BED29F /* LoginViewController.swift */; };
+		E3A77DD226AFCD47007A8729 /* CreateUserAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A77DD126AFCD47007A8729 /* CreateUserAPIResponse.swift */; };
+		E3A77DD426AFCD6D007A8729 /* AuthAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A77DD326AFCD6D007A8729 /* AuthAPIResponse.swift */; };
+		E3A77DD826AFD40E007A8729 /* QuestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A77DD726AFD40E007A8729 /* QuestionsView.swift */; };
+		E3A77DDA26AFD418007A8729 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A77DD926AFD418007A8729 /* QuestionsViewController.swift */; };
 		E3E7158026705B4800CB4796 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E7157F26705B4800CB4796 /* AppDelegate.swift */; };
 		E3E7158226705B4800CB4796 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E7158126705B4800CB4796 /* SceneDelegate.swift */; };
 		E3E7158426705B4800CB4796 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E7158326705B4800CB4796 /* ViewController.swift */; };
@@ -23,6 +27,8 @@
 		E3E7158C26705B4C00CB4796 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3E7158A26705B4C00CB4796 /* LaunchScreen.storyboard */; };
 		E3E715962670617A00CB4796 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E715952670617A00CB4796 /* TestView.swift */; };
 		E3E715982670618100CB4796 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E715972670618100CB4796 /* TestViewController.swift */; };
+		E3FD942F26B4B81900D2947F /* OpenQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD942E26B4B81900D2947F /* OpenQuestionTableViewCell.swift */; };
+		E3FD943126B4EF2700D2947F /* DropDownQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD943026B4EF2700D2947F /* DropDownQuestionTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +41,10 @@
 		E30D6E9826A4E03200BED29F /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		E30D6E9A26A4E03A00BED29F /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		E30D6E9D26A4EED600BED29F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E3A77DD126AFCD47007A8729 /* CreateUserAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserAPIResponse.swift; sourceTree = "<group>"; };
+		E3A77DD326AFCD6D007A8729 /* AuthAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPIResponse.swift; sourceTree = "<group>"; };
+		E3A77DD726AFD40E007A8729 /* QuestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsView.swift; sourceTree = "<group>"; };
+		E3A77DD926AFD418007A8729 /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
 		E3E7157C26705B4800CB4796 /* foto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = foto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3E7157F26705B4800CB4796 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3E7158126705B4800CB4796 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +54,8 @@
 		E3E7158D26705B4C00CB4796 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E3E715952670617A00CB4796 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		E3E715972670618100CB4796 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		E3FD942E26B4B81900D2947F /* OpenQuestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuestionTableViewCell.swift; sourceTree = "<group>"; };
+		E3FD943026B4EF2700D2947F /* DropDownQuestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownQuestionTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +81,6 @@
 		E3095D8926AD1DDE00BD8869 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				E3095D8E26AE437C00BD8869 /* Networking.swift */,
 				E3095D8A26AD1DED00BD8869 /* UITextFieldWithPadding.swift */,
 				E3095D8C26AD1F2200BD8869 /* UIFont+AppFonts.swift */,
 			);
@@ -80,6 +91,8 @@
 			isa = PBXGroup;
 			children = (
 				E3095D9126AE497A00BD8869 /* User.swift */,
+				E3A77DD126AFCD47007A8729 /* CreateUserAPIResponse.swift */,
+				E3A77DD326AFCD6D007A8729 /* AuthAPIResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -88,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				E3095D8926AD1DDE00BD8869 /* Shared */,
+				E3A77DD526AFD3DF007A8729 /* Questions */,
 				E3095D8426AD05A200BD8869 /* Create Account */,
 				E30D6E9C26A4EEB700BED29F /* Login */,
 				E30D6E9726A4E01C00BED29F /* Welcome */,
@@ -112,6 +126,25 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		E3A77DD526AFD3DF007A8729 /* Questions */ = {
+			isa = PBXGroup;
+			children = (
+				E3A77DD726AFD40E007A8729 /* QuestionsView.swift */,
+				E3A77DD926AFD418007A8729 /* QuestionsViewController.swift */,
+				E3FD942E26B4B81900D2947F /* OpenQuestionTableViewCell.swift */,
+				E3FD943026B4EF2700D2947F /* DropDownQuestionTableViewCell.swift */,
+			);
+			path = Questions;
+			sourceTree = "<group>";
+		};
+		E3A77DD626AFD3F1007A8729 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				E3095D8E26AE437C00BD8869 /* Networking.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		E3E7157326705B4800CB4796 = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +164,7 @@
 		E3E7157E26705B4800CB4796 /* foto */ = {
 			isa = PBXGroup;
 			children = (
+				E3A77DD626AFD3F1007A8729 /* Utilities */,
 				E3095D9026AE497100BD8869 /* Models */,
 				E30D6E9626A4E01500BED29F /* Views */,
 				E3E715932670616600CB4796 /* TestViewController */,
@@ -231,19 +265,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3095D8826AD05D800BD8869 /* AccountView.swift in Sources */,
+				E3FD942F26B4B81900D2947F /* OpenQuestionTableViewCell.swift in Sources */,
 				E3095D8626AD05C900BD8869 /* CreateAccountViewController.swift in Sources */,
 				E3E715982670618100CB4796 /* TestViewController.swift in Sources */,
 				E3E715962670617A00CB4796 /* TestView.swift in Sources */,
 				E3E7158426705B4800CB4796 /* ViewController.swift in Sources */,
+				E3FD943126B4EF2700D2947F /* DropDownQuestionTableViewCell.swift in Sources */,
 				E3095D8B26AD1DED00BD8869 /* UITextFieldWithPadding.swift in Sources */,
 				E30D6E9926A4E03200BED29F /* WelcomeViewController.swift in Sources */,
 				E3095D9226AE497A00BD8869 /* User.swift in Sources */,
+				E3A77DD826AFD40E007A8729 /* QuestionsView.swift in Sources */,
 				E3095D8D26AD1F2200BD8869 /* UIFont+AppFonts.swift in Sources */,
 				E30D6E9E26A4EED600BED29F /* LoginViewController.swift in Sources */,
 				E3E7158026705B4800CB4796 /* AppDelegate.swift in Sources */,
+				E3A77DD426AFCD6D007A8729 /* AuthAPIResponse.swift in Sources */,
 				E3E7158226705B4800CB4796 /* SceneDelegate.swift in Sources */,
+				E3A77DDA26AFD418007A8729 /* QuestionsViewController.swift in Sources */,
 				E30D6E9B26A4E03A00BED29F /* WelcomeView.swift in Sources */,
 				E3095D8F26AE437C00BD8869 /* Networking.swift in Sources */,
+				E3A77DD226AFCD47007A8729 /* CreateUserAPIResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

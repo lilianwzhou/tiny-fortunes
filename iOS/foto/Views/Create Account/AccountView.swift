@@ -41,6 +41,7 @@ class AccountView: UIView {
         textField.placeholder = "supersecretawesomepassword"
         textField.autocorrectionType = .no
         textField.autocapitalizationType = .none
+        textField.isSecureTextEntry = true
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -97,7 +98,7 @@ class AccountView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
             
-        //MY CUSTOM SHIT
+        //MY CUSTOM STUFF
         backgroundColor = .white
         addSubview(header)
         addSubview(emailLabel)

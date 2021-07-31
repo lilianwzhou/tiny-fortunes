@@ -15,7 +15,6 @@ class CreateAccountViewController: UIViewController {
     
     
     override func loadView() {
-        super.loadView()
         self.view = AccountView()
     }
     
@@ -31,15 +30,33 @@ class CreateAccountViewController: UIViewController {
         
     }
     
-    @objc private func createAccount() {
-        
-        //with guard
+    private func validateEmail() -> String? {
         guard let email = customView.emailTextField.text, !email.isEmpty else {
             customView.emailTextField.layer.borderColor = UIColor.red.cgColor
             customView.emailTextField.layer.borderWidth = 3
-            return
+            validatePassword()
+            return nil
         }
         customView.emailTextField.layer.borderWidth = 0
+        return email
+    }
+    
+    @discardableResult private func validatePassword() -> String? {
+        guard let password = customView.passwordTextField.text, !password.isEmpty else {
+            customView.passwordTextField.layer.borderColor = UIColor.red.cgColor
+            customView.passwordTextField.layer.borderWidth = 3
+            return nil
+        }
+        customView.passwordTextField.layer.borderWidth = 0
+        return password
+    }
+    
+    @objc private func createAccount() {
+        
+        //with guard
+        guard let email = validateEmail(), let password = validatePassword() else {
+            return
+        }
         
         
         //without guard -> no email variable
@@ -49,12 +66,6 @@ class CreateAccountViewController: UIViewController {
         //            return
         //        }
         
-        guard let password = customView.passwordTextField.text, !password.isEmpty else {
-            customView.passwordTextField.layer.borderColor = UIColor.red.cgColor
-            customView.passwordTextField.layer.borderWidth = 3
-            return
-        }
-        customView.passwordTextField.layer.borderWidth = 0
         createUserAPICall(email: email, password: password)
     }
     
@@ -111,7 +122,7 @@ class CreateAccountViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.customView.hideError()
                 }
-                // store somewhere? or call the auth endpoint with email and password to get JWT(the auth token to send with user related requests for verification)
+                // store ID somewhere? or call the auth endpoint with email and password to get JWT(the auth token to send with user related requests for verification)
                 self.authorizeUserAPICall(email: email, password: password)
             }
             
@@ -163,20 +174,22 @@ class CreateAccountViewController: UIViewController {
                 return
             }
             
-            if let object =  try? JSONDecoder().decode(CreateUserAPIResponse.self, from: data) {
+            if let object =  try? JSONDecoder().decode(AuthAPIResponse.self, from: data) {
                 print(object)
                 //print(object.jwt)
                 DispatchQueue.main.async {
                     self.customView.hideError()
                 }
-                // store somewhere? or call the auth endpoint with email and password to get JWT(the auth token to send with user related requests for verification)
+                // store ssomewhere? or call the auth endpoint with email and password to get JWT(the auth token to send with user related requests for verification)
+                Networking.jwt = object.accessToken
+                
+                DispatchQueue.main.async {
+                    let questionsVC = QuestionsViewController()
+                    self.navigationController?.pushViewController(questionsVC, animated: true)
+                }
             }
             
         })
-        
         dataTask.resume()
     }
-}
-struct CreateUserAPIResponse: Codable {
-    let id: String
 }

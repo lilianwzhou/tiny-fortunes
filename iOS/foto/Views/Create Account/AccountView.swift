@@ -168,6 +168,14 @@ class AccountView: UIView {
         }
         
     }
+    
+    func hideError() {
+        errorHeightConstraint?.constant = 0
+        
+        UIView.animate(withDuration: 0.3) {
+            self.layoutIfNeeded()
+        }
+    }
 }
 
 

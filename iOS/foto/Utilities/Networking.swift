@@ -11,6 +11,7 @@ struct Networking {
     static private let baseURL = "http://localhost:3000"
     
     static var jwt: String?
+    static var userID: String?
     
     static func getRequestFor(route: Route, method: RequestType) -> URLRequest? {
         let finalURL = baseURL + "/" + route.rawValue

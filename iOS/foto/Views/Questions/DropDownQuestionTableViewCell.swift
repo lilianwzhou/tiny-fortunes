@@ -217,7 +217,7 @@ enum CellType {
     case open
     case boolean(isExpanded: Bool, currentSelected: Bool?)
     case dropdown(items: [String], isExpanded: Bool, currentSelected: String?)
-    
+    case date(currentDate: Date?)
     func isDropdown() -> Bool {
         switch self {
         case .boolean, .dropdown:
@@ -244,8 +244,8 @@ enum CellType {
             return .boolean(isExpanded: !isExpanded, currentSelected: current)
         case .dropdown(let e, let i, let c):
             return .dropdown(items: e, isExpanded: !i, currentSelected: c)
-        case .open:
-            return .open
+        default:
+            return self
         }
     }
     

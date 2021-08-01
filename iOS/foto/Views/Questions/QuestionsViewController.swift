@@ -14,7 +14,8 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
         CellInfo(keyName: "location", prompt: "Where are you located?", cellType: .dropdown(items: ["San Francisco", "Los Angeles", "Awesome"], isExpanded: false, currentSelected: nil)),
         CellInfo(keyName: "poopy", prompt: "Where are you ssss", cellType: .dropdown(items: ["San A", "B", "C", "D","E"], isExpanded: false, currentSelected: nil)),
         CellInfo(keyName: "location", prompt: "Where are you fdasdfasd", cellType: .dropdown(items: ["San Francisco", "Los Angeles", "Awesome"], isExpanded: false, currentSelected: nil)),
-        CellInfo(keyName: "bob", prompt: "Sup", cellType: .boolean(isExpanded: false, currentSelected: nil))
+        CellInfo(keyName: "bob", prompt: "Sup", cellType: .boolean(isExpanded: false, currentSelected: nil)),
+        CellInfo(keyName: "date", prompt: "sup", cellType: .date(currentDate: nil))
     ]
     var questionsView: QuestionsView {
         return self.view as! QuestionsView
@@ -30,6 +31,7 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
         questionsView.tableView.dataSource = self
         questionsView.tableView.register(OpenQuestionTableViewCell.self, forCellReuseIdentifier: "Open")
         questionsView.tableView.register(DropdownQuestionTableViewCell.self, forCellReuseIdentifier: "Dropdown")
+        questionsView.tableView.register(DateQuestionTableViewCell.self, forCellReuseIdentifier: "DateCell")
 
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -54,6 +56,12 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
             return cell
         case .dropdown, .boolean:
             let cell = tableView.dequeueReusableCell(withIdentifier: "Dropdown") as! DropdownQuestionTableViewCell
+            cell.info = cellInfo
+            cell.delegate = self
+            cell.tag = indexPath.row
+            return cell
+        case .date:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DateCell") as! DateQuestionTableViewCell
             cell.info = cellInfo
             cell.delegate = self
             cell.tag = indexPath.row
@@ -97,4 +105,19 @@ extension QuestionsViewController: DropdownQuestionTableViewCellDelegate {
         
         questionsView.tableView.reloadRows(at: [IndexPath(row: row, section: 0)], with: .fade)
     }
+}
+
+extension QuestionsViewController: DateQuestionTableViewCellDelegate {
+    func didSelectDate(date: Date?, row: Int) {
+        guard case .date(let date) = testData[row].cellType else {
+            return
+        }
+        
+        let item: CellType = .date(currentDate: date)
+        testData[row].cellType = item
+        
+        questionsView.tableView.reloadRows(at: [IndexPath(row: row, section: 0)], with: .fade)
+    }
+    
+    
 }

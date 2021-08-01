@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE367BA826B669AC00986FD6 /* DateQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE367BA726B669AC00986FD6 /* DateQuestionTableViewCell.swift */; };
 		E3095D8626AD05C900BD8869 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3095D8526AD05C900BD8869 /* CreateAccountViewController.swift */; };
 		E3095D8826AD05D800BD8869 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3095D8726AD05D800BD8869 /* AccountView.swift */; };
 		E3095D8B26AD1DED00BD8869 /* UITextFieldWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3095D8A26AD1DED00BD8869 /* UITextFieldWithPadding.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE367BA726B669AC00986FD6 /* DateQuestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateQuestionTableViewCell.swift; sourceTree = "<group>"; };
 		E3095D8526AD05C900BD8869 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		E3095D8726AD05D800BD8869 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		E3095D8A26AD1DED00BD8869 /* UITextFieldWithPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldWithPadding.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				E3A77DD926AFD418007A8729 /* QuestionsViewController.swift */,
 				E3FD942E26B4B81900D2947F /* OpenQuestionTableViewCell.swift */,
 				E3FD943026B4EF2700D2947F /* DropDownQuestionTableViewCell.swift */,
+				BE367BA726B669AC00986FD6 /* DateQuestionTableViewCell.swift */,
 			);
 			path = Questions;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				E3FD942F26B4B81900D2947F /* OpenQuestionTableViewCell.swift in Sources */,
 				E3095D8626AD05C900BD8869 /* CreateAccountViewController.swift in Sources */,
 				E3E715982670618100CB4796 /* TestViewController.swift in Sources */,
+				BE367BA826B669AC00986FD6 /* DateQuestionTableViewCell.swift in Sources */,
 				E3E715962670617A00CB4796 /* TestView.swift in Sources */,
 				E3E7158426705B4800CB4796 /* ViewController.swift in Sources */,
 				E3FD943126B4EF2700D2947F /* DropDownQuestionTableViewCell.swift in Sources */,

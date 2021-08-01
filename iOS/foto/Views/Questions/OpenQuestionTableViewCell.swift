@@ -25,7 +25,6 @@ class OpenQuestionTableViewCell: UITableViewCell {
         return answer
     }()
     
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -34,6 +33,7 @@ class OpenQuestionTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        selectionStyle = .none
         let border = UIView()
         border.translatesAutoresizingMaskIntoConstraints = false
         border.backgroundColor = .black
@@ -54,7 +54,8 @@ class OpenQuestionTableViewCell: UITableViewCell {
             border.bottomAnchor.constraint(equalTo: answerField.bottomAnchor),
             border.leadingAnchor.constraint(equalTo: answerField.leadingAnchor),
             border.trailingAnchor.constraint(equalTo: answerField.trailingAnchor),
-            border.heightAnchor.constraint(equalToConstant: 0.5)
+            border.heightAnchor.constraint(equalToConstant: 1),
+            border.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -3)
         ])
         
         

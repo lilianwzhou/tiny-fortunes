@@ -13,7 +13,7 @@ import { UserDetailManager } from "./models/UserDetails.js";
 import dotenv from "dotenv";
 import { AuthMiddleware } from "./middleware/jwt.js";
 import { FortuneManager } from "./models/Fortune.js";
-
+import cors from "cors";
 dotenv.config();
 
 const app = express();
@@ -61,6 +61,8 @@ const swaggerOptions = {
 };
 
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
+
+app.use(cors());
 
 if (process.env.NODE_ENV === "development") {
   morgan.token("body", (req, res) => JSON.stringify(req.body));
@@ -124,7 +126,7 @@ app.use(function (req, res, next) {
 
 if (process.env.NODE_ENV === "production") {
   app.use(auth.requireClientKey);
-} 
+}
 
 /**
  * @swagger
@@ -211,7 +213,8 @@ app.get("/users", [
   auth.validateAuth,
   auth.adminOnly,
   async (req, res) => {
-    let users = await UserManager.shared().listUsers(25, 0);
+    console.log(req.query.search);
+    let users = await UserManager.shared().listUsers(500, 0, req.query.search);
 
     res.status(200).send(users);
   },
@@ -505,27 +508,30 @@ app.post("/auth", async (req, res) => {
         try {
           let salt = crypto.randomBytes(16).toString("base64");
           req.body.refreshKey = salt;
-          console.log(process.env.JWT_SECRET);
           if (user.isAdmin === true) {
             req.body.isAdmin = true;
+          } else {
+            req.body.isAdmin = false;
+          }
+          if (req.query.isAdmin === "true" && req.body.isAdmin === false) {
+            return res.status(403).send("Invalid Permissions");
           }
           let token = jwt.sign(req.body, process.env.JWT_SECRET, {
             expiresIn: 1000000000000000000,
           });
-          console.log(req.body)
           return res.status(201).send({ accessToken: token, userID: user._id });
         } catch (err) {
           console.log(err);
           return res.status(500).send(err);
         }
       } else {
-        res.status(400).send({ errors: `Invalid e-mail and/or password` });
+        res.status(400).send(`Invalid e-mail and/or password`);
       }
     } else {
-      res.status(400).send({ errors: `User not found` });
+      res.status(400).send(`User not found`);
     }
   } else {
-    res.status(400).send({ error: "Missing body fields: email, password" });
+    res.status(400).send("Missing body fields: email, password");
   }
 });
 

@@ -10,9 +10,20 @@ export class UserDetailManager {
   userDetailSchema = new this.Schema({
     _id: String,
     first_name: String,
+    last_name: String,
     longitude: Number,
     latitude: Number,
     birthday: Date,
+    occupation: String,
+    pineapples_on_pizza: Boolean,
+    wipe_standing_up: Boolean,
+    water_wet: Boolean,
+    dog_person: Boolean,
+    touch_grass_today: Boolean,
+    hulk_flavour_sour_apple: Boolean,
+    early_bird: Boolean,
+    favourite_colour: String,
+    likes_sushi: Boolean,
   });
 
   UserDetail = this.dbManager

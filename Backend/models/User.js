@@ -55,7 +55,16 @@ export class UserManager {
     return this.User.findOne({ _id: userId }).populate("userDetails");
   }
 
-  async listUsers(limit = 25, page) {
+  async listUsers(limit = 500, page, searchString) {
+    console.log("SEARCH: " + searchString);
+    if (searchString) {
+      const regex = new RegExp(searchString, "i"); // i for case insensitive
+      return this.User.find({ email: { $regex: regex } })
+        .limit(limit)
+        .skip(limit * page)
+        .populate("userDetails")
+        .exec();
+    }
     return this.User.find()
       .limit(limit)
       .skip(limit * page)

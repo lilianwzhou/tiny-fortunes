@@ -1,5 +1,4 @@
 import { DatabaseManager } from "../mongo/databaseShared.js";
-import { UserManager } from "./User.js";
 
 export class FortuneManager {
   dbManager = DatabaseManager.shared();
@@ -9,13 +8,13 @@ export class FortuneManager {
 
   fortuneSchema = new this.Schema({
     _id: String,
-    message: Number,
-    isQuestionDependent: Boolean,
-    maxDistance: Number,
-    details: {
-      type: this.dbManager.mongoose().Schema.Types.ObjectId,
-      ref: "UserDetail",
-    },
+    message: String,
+    buckets: [
+      {
+        key: String,
+        rule: String,
+      },
+    ],
   });
 
   Fortune = this.dbManager.mongoose().model("Fortune", this.fortuneSchema);
@@ -29,3 +28,27 @@ export class FortuneManager {
     return this.sharedInstance;
   }
 }
+
+/**
+ *
+ * MADLIB FORTUNES are of the FORM {} whenever you need KEYS
+ *
+ *
+ * message: "{KEY} went down the road to sugandese"
+ *
+ *
+ * buckets: [BUCKET]
+ *
+ * bucket: {
+ *  key: string
+ *  rule: Rule
+ * }
+ *
+ *
+ *
+ *
+ * Rule {
+ *  keys: [String]
+ *  rule: (EQUAL, RANGE, DISTANCE)
+ * }
+ */

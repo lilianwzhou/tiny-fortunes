@@ -8,10 +8,12 @@ export default function Login() {
   const [password, setPassword] = useState("");
 
   function validateForm() {
+    console.log("VALIDATE FORM");
     return email.length > 0 && password.length > 0;
   }
 
   function handleSubmit(event) {
+    console.log("HANDLE SUBMIT");
     event.preventDefault();
   }
 

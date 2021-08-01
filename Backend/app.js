@@ -340,6 +340,29 @@ app.post("/user", async (req, res) => {
  *                  type: number
  *                longitude:
  *                  type: number
+ *                birthday:
+ *                  type: string
+ *                  format: date
+ *                occupation:
+ *                  type: string
+ *                pineapples_on_pizza:
+ *                  type: boolean
+ *                wipe_standing_up:
+ *                  type: boolean
+ *                water_wet:
+ *                  type: boolean
+ *                dog_person:
+ *                  type: boolean
+ *                touch_grass_today:
+ *                  type: boolean
+ *                hulk_flavour_sour_apple:
+ *                  type: boolean
+ *                early_bird:
+ *                  type: boolean
+ *                favourite_colour:
+ *                  type: string
+ *                likes_sushi:
+ *                  type: boolean
  *    responses:
  *      '200':
  *        description: Successfully patched user with new info

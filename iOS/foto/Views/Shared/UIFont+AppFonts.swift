@@ -14,6 +14,10 @@ extension UIFont {
         return .systemFont(ofSize: 18, weight: .medium)
     }
     
+    static var appBodyBold: UIFont {
+        return .systemFont(ofSize: 18, weight: .bold)
+    }
+    
     static var headerFont: UIFont {
         return .systemFont(ofSize: 57, weight: .bold)
     }

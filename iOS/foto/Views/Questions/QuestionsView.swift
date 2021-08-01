@@ -11,8 +11,11 @@ class QuestionsView: UIView {
     
     let tableView: UITableView = {
         let table = UITableView()
+        table.allowsSelection = true
         table.translatesAutoresizingMaskIntoConstraints = false
         table.separatorStyle = .none
+        table.estimatedRowHeight = 60
+        table.rowHeight = UITableView.automaticDimension
         return table
     }()
     
@@ -31,7 +34,9 @@ class QuestionsView: UIView {
             
         ])
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        gestureRecognizer.cancelsTouchesInView = false
         addGestureRecognizer(gestureRecognizer)
+        
     }
     
     required init?(coder: NSCoder) {

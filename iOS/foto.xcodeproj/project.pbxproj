@@ -29,6 +29,8 @@
 		E3E715982670618100CB4796 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E715972670618100CB4796 /* TestViewController.swift */; };
 		E3FD942F26B4B81900D2947F /* OpenQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD942E26B4B81900D2947F /* OpenQuestionTableViewCell.swift */; };
 		E3FD943126B4EF2700D2947F /* DropDownQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD943026B4EF2700D2947F /* DropDownQuestionTableViewCell.swift */; };
+		E3FD943426B50EAB00D2947F /* FortuneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD943326B50EAB00D2947F /* FortuneView.swift */; };
+		E3FD943626B50EB600D2947F /* FortuneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD943526B50EB600D2947F /* FortuneViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,8 @@
 		E3E715972670618100CB4796 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		E3FD942E26B4B81900D2947F /* OpenQuestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuestionTableViewCell.swift; sourceTree = "<group>"; };
 		E3FD943026B4EF2700D2947F /* DropDownQuestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownQuestionTableViewCell.swift; sourceTree = "<group>"; };
+		E3FD943326B50EAB00D2947F /* FortuneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FortuneView.swift; sourceTree = "<group>"; };
+		E3FD943526B50EB600D2947F /* FortuneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FortuneViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,7 @@
 		E30D6E9626A4E01500BED29F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E3FD943226B50E9600D2947F /* Fortune */,
 				E3095D8926AD1DDE00BD8869 /* Shared */,
 				E3A77DD526AFD3DF007A8729 /* Questions */,
 				E3095D8426AD05A200BD8869 /* Create Account */,
@@ -195,6 +200,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		E3FD943226B50E9600D2947F /* Fortune */ = {
+			isa = PBXGroup;
+			children = (
+				E3FD943326B50EAB00D2947F /* FortuneView.swift */,
+				E3FD943526B50EB600D2947F /* FortuneViewController.swift */,
+			);
+			path = Fortune;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -264,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3FD943626B50EB600D2947F /* FortuneViewController.swift in Sources */,
 				E3095D8826AD05D800BD8869 /* AccountView.swift in Sources */,
 				E3FD942F26B4B81900D2947F /* OpenQuestionTableViewCell.swift in Sources */,
 				E3095D8626AD05C900BD8869 /* CreateAccountViewController.swift in Sources */,
@@ -276,6 +291,7 @@
 				E3095D9226AE497A00BD8869 /* User.swift in Sources */,
 				E3A77DD826AFD40E007A8729 /* QuestionsView.swift in Sources */,
 				E3095D8D26AD1F2200BD8869 /* UIFont+AppFonts.swift in Sources */,
+				E3FD943426B50EAB00D2947F /* FortuneView.swift in Sources */,
 				E30D6E9E26A4EED600BED29F /* LoginViewController.swift in Sources */,
 				E3E7158026705B4800CB4796 /* AppDelegate.swift in Sources */,
 				E3A77DD426AFCD6D007A8729 /* AuthAPIResponse.swift in Sources */,

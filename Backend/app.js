@@ -124,7 +124,8 @@ app.use(function (req, res, next) {
 
 if (process.env.NODE_ENV === "production") {
   app.use(auth.requireClientKey);
-}
+} 
+
 /**
  * @swagger
  * /user/admin:
@@ -511,6 +512,7 @@ app.post("/auth", async (req, res) => {
           let token = jwt.sign(req.body, process.env.JWT_SECRET, {
             expiresIn: 1000000000000000000,
           });
+          console.log(req.body)
           return res.status(201).send({ accessToken: token, userID: user._id });
         } catch (err) {
           console.log(err);

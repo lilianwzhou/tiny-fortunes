@@ -94,7 +94,7 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            guard resp.statusCode == 200 else {
+            guard resp.statusCode/100 == 2 else {
                 DispatchQueue.main.async {
                     if let errorMessage = String(data: data, encoding: .utf8) {
                         self.customView?.showError(message: errorMessage)
@@ -103,15 +103,14 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            if let object =  try? JSONDecoder().decode(AuthAPIResponse.self, from: data) {
-                print(object)
+            if let object = try? JSONDecoder().decode(AuthAPIResponse.self, from: data) {
                 //print(object.jwt)
                 DispatchQueue.main.async {
                     self.customView?.hideError()
                 }
                 // store ssomewhere? or call the auth endpoint with email and password to get JWT(the auth token to send with user related requests for verification)
                 Networking.jwt = object.accessToken
-                
+                Networking.userID = object.userID
                 DispatchQueue.main.async {
                     let questionsVC = QuestionsViewController()
                     self.navigationController?.pushViewController(questionsVC, animated: true)

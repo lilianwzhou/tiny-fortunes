@@ -9,8 +9,6 @@ import Foundation
 
 struct AuthAPIResponse: Codable {
     let accessToken: String
-    
-    init(accessToken: String) {
-        self.accessToken = accessToken
-    }
+    let userID: String
+
 }

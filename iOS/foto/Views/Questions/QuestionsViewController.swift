@@ -11,12 +11,22 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var testData: [CellInfo] = [
         CellInfo(keyName: "first_name", prompt: "What is your first name?", cellType: .open),
-        CellInfo(keyName: "location", prompt: "Where are you located?", cellType: .dropdown(items: ["San Francisco", "Los Angeles", "Awesome"], isExpanded: false, currentSelected: nil)),
-        CellInfo(keyName: "poopy", prompt: "Where are you ssss", cellType: .dropdown(items: ["San A", "B", "C", "D","E"], isExpanded: false, currentSelected: nil)),
-        CellInfo(keyName: "location", prompt: "Where are you fdasdfasd", cellType: .dropdown(items: ["San Francisco", "Los Angeles", "Awesome"], isExpanded: false, currentSelected: nil)),
-        CellInfo(keyName: "bob", prompt: "Sup", cellType: .boolean(isExpanded: false, currentSelected: nil)),
-        CellInfo(keyName: "date", prompt: "sup", cellType: .date(currentDate: nil))
+        CellInfo(keyName: "last_name", prompt: "What is your last name?", cellType: .open),
+        CellInfo(keyName: "location", prompt: "Where are you located?", cellType: .dropdown(items: ["San Francisco", "Los Angeles", "New York", "Calgary", "Vancouver", "Waterloo", "Austin"], isExpanded: false, currentSelected: nil)),
+        CellInfo(keyName: "birthday", prompt: "When is your birthday?", cellType: .open),
+        CellInfo(keyName: "occupation", prompt: "What is your job?", cellType: .dropdown(items: ["Healthcare", "Tech", "Finance", "Social Work", "Other"], isExpanded: false, currentSelected: nil)),
+        CellInfo(keyName: "pineapples_on_pizza", prompt: "Do pineapples belong on pizza?", cellType: .boolean(isExpanded: false, currentSelected: nil)),
+        CellInfo(keyName: "wipe_standing_up", prompt: "Do you wipe standing or sitting?", cellType: .dropdown(items: ["Sitting", "Standing"], isExpanded: false, currentSelected: nil)),
+        CellInfo(keyName: "water_wet", prompt: "Is water wet?", cellType: .boolean(isExpanded: false, currentSelected: nil)),
+        CellInfo(keyName: "dog_person", prompt: "Dogs or cats?", cellType: .dropdown(items: ["Dog", "Cat"], isExpanded: false, currentSelected: nil)),
+        CellInfo(keyName: "touch_grass_today", prompt: "Have you touched grass today?", cellType: .boolean(isExpanded: false, currentSelected: nil)),
+        CellInfo(keyName: "hulk_flavour_sour_apple", prompt: "If the hulk was a flavour, would he be lime or green apple?", cellType: .dropdown(items: ["Lime", "Green Apple"], isExpanded: false, currentSelected: nil)),
+        CellInfo(keyName: "early_bird", prompt: "Are you a night owl or an early bird?", cellType: .dropdown(items: ["Night Owl", "Early Bird"], isExpanded: false, currentSelected: nil)),
+        CellInfo(keyName: "favourite_colour", prompt: "What is your favourite colour?", cellType: .open),
+        CellInfo(keyName: "likes_sushi", prompt: "Do you like sushi?", cellType: .boolean(isExpanded: false, currentSelected: nil))
+    
     ]
+    
     var questionsView: QuestionsView {
         return self.view as! QuestionsView
     }
@@ -85,11 +95,10 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
 extension QuestionsViewController: DropdownQuestionTableViewCellDelegate {
     func didSelect(value: String?, row: Int) {
         switch testData[row].cellType {
-        case .dropdown(let i, let isExpanded, _):
+        case .dropdown(let i, _, _):
             let item: CellType = .dropdown(items: i, isExpanded: false, currentSelected: value)
             testData[row].cellType = item
-//            (questionsView.tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? DropdownQuestionTableViewCell)?.info?.cellType = item
-        case .boolean(let isExpanded, _):
+        case .boolean:
             var nextValue: Bool?
             
             if value != nil {
@@ -98,7 +107,6 @@ extension QuestionsViewController: DropdownQuestionTableViewCellDelegate {
             
             let item: CellType = .boolean(isExpanded: false, currentSelected: nextValue)
             testData[row].cellType = item
-//            (questionsView.tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? DropdownQuestionTableViewCell)?.info?.cellType = item
         default:
             break
         }

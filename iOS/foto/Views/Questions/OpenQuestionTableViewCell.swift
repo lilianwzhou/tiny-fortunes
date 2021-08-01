@@ -40,17 +40,17 @@ class OpenQuestionTableViewCell: UITableViewCell {
         
         
         backgroundColor = .white
-        addSubview(questionLabel)
-        addSubview(answerField)
-        addSubview(border)
+        contentView.addSubview(questionLabel)
+        contentView.addSubview(answerField)
+        contentView.addSubview(border)
         
         NSLayoutConstraint.activate([
-            questionLabel.topAnchor.constraint(equalTo: topAnchor),
-            questionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            questionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            questionLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            questionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
+            questionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
             answerField.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor, constant: 10),
             answerField.topAnchor.constraint(equalTo: questionLabel.bottomAnchor, constant: 20),
-            answerField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            answerField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
             border.bottomAnchor.constraint(equalTo: answerField.bottomAnchor),
             border.leadingAnchor.constraint(equalTo: answerField.leadingAnchor),
             border.trailingAnchor.constraint(equalTo: answerField.trailingAnchor),

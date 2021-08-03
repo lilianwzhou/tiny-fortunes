@@ -424,6 +424,41 @@ app.get("/user/:userID", [
 
 /**
  * @swagger
+ * /fortune/{userID}:
+ *  get:
+ *    summary: Gets specific user
+ *    parameters:
+ *      - in: header
+ *        name: authorization-client
+ *        schema:
+ *          type: string
+ *        required: false
+ *      - in: path
+ *        name: userID
+ *        description: The user id to get a fortune for.
+ *        schema:
+ *          type: string
+ *          required: true
+ *    responses:
+ *      '200':
+ *        description: Successfully patched user with new info
+ */
+app.get("/fortune/:userID", [
+  auth.validateAuth,
+  auth.sameUserOrAdmin,
+  async (req, res) => {
+    try {
+      let message = await FortuneManager.shared().getFortune(req.params.userID);
+      res.status(200).send(message);
+    } catch (err) {
+      console.log(err);
+      res.status(400).send(err);
+    }
+  },
+]);
+
+/**
+ * @swagger
  * /user/{userID}:
  *  delete:
  *    summary: Deletes User

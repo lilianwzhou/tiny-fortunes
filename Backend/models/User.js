@@ -17,6 +17,7 @@ export class UserManager {
       type: this.dbManager.mongoose().Schema.Types.ObjectId,
       ref: "UserDetail",
     },
+    lastFortuneGiven: Date,
     seenFortunes: [{ fortuneID: String, nextDate: Date }],
   });
 

@@ -1,5 +1,5 @@
 import { DatabaseManager } from "../mongo/databaseShared.js";
-
+import { UserManager } from "./User.js";
 export class FortuneManager {
   dbManager = DatabaseManager.shared();
   static sharedInstance;
@@ -26,6 +26,21 @@ export class FortuneManager {
       this.sharedInstance = new FortuneManager();
     }
     return this.sharedInstance;
+  }
+
+  async getFortune(userID) {
+    let user = await UserManager.shared().getUserFromId(userID);
+
+    let date = new Date();
+    date.setHours(0, 0, 0, 0);
+    console.log(user.lastFortuneGiven);
+    if (user.lastFortuneGiven && +user.lastFortuneGiven === +date) {
+      return Promise.reject("Be patient, asshole wait a day!");
+    } else {
+      // user.lastFortuneGiven = date;
+      await user.save();
+      return { message: "Focus Lilian." };
+    }
   }
 }
 

@@ -194,6 +194,78 @@ app.post("/user/admin", [
     res.status(200).send({ id: id });
   },
 ]);
+
+/**
+ * @swagger
+ * /fortune:
+ *  post:
+ *    summary: Creates a new fortune
+ *    parameters:
+ *        - in: header
+ *          name: authorization-client
+ *          schema:
+ *            type: string
+ *          required: false
+ *    requestBody:
+ *        required: true
+ *        description: The fortune to create.
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              required:
+ *                - message
+ *              properties:
+ *                message:
+ *                  type: string
+ *                buckets:
+ *                  type: object
+ *    responses:
+ *      '200':
+ *        description: Get an ID back with the user..
+ */
+app.post("/fortune", [
+  auth.validateAuth,
+  auth.adminOnly,
+  async (req, res) => {
+    if (req.body.message === null) {
+      res.status(400).send("Provide a message");
+      return;
+    }
+
+    let id = await FortuneManager.shared().addFortune(req.body);
+    res.status(200).send({ id: id });
+  },
+]);
+
+/**
+ * @swagger
+ * /fortunes:
+ *  get:
+ *    summary: Gets fortunes
+ *    parameters:
+ *        - in: header
+ *          name: authorization-client
+ *          schema:
+ *            type: string
+ *          required: false
+ *    responses:
+ *      '200':
+ *        description: List of fortunes
+ */
+app.get("/fortunes", [
+  auth.validateAuth,
+  auth.adminOnly,
+  async (req, res) => {
+    let fortunes = await FortuneManager.shared().listFortunes(
+      500,
+      0,
+      req.query.search
+    );
+
+    res.status(200).send(fortunes);
+  },
+]);
 /**
  * @swagger
  * /users:
@@ -496,6 +568,47 @@ app.delete("/user/:userID", [
     await UserManager.shared().deleteUser(req.params.userID);
 
     res.status(204).send("Deleted User");
+  },
+]);
+
+/**
+ * @swagger
+ * /fortune/{fortuneID}:
+ *  delete:
+ *    summary: Deletes Fortune
+ *    parameters:
+ *      - in: header
+ *        name: authorization-client
+ *        schema:
+ *          type: string
+ *        required: false
+ *      - in: path
+ *        name: fortuneID
+ *        description: The fortune id to delete.
+ *        schema:
+ *          type: string
+ *          required: true
+ *    responses:
+ *      '204':
+ *        description: Deleted a fortune with ID..
+ */
+app.delete("/fortune/:fortuneID", [
+  auth.validateAuth,
+  auth.sameUserOrAdmin,
+  async (req, res) => {
+    if (req.params === null || req.params.fortuneID == null) {
+      res.status(400).send("Provide a fortune ID");
+      return;
+    }
+
+    try {
+      await FortuneManager.shared().delete(req.params.fortuneID);
+    } catch (e) {
+      res.status(400).send(e);
+      return;
+    }
+
+    res.status(204).send("Deleted Fortune");
   },
 ]);
 

@@ -17,7 +17,7 @@ struct UserDetails: Codable {
     var lastName: String?
     var latitude: Double?
     var longitude: Double?
-    var birthday: Date?
+    var birthday: String?
     var occupation: String?
     var pineapplesOnPizza: Bool?
     var wipeStandingUp: Bool?

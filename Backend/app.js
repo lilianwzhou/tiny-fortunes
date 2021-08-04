@@ -17,7 +17,7 @@ import cors from "cors";
 dotenv.config();
 
 const app = express();
-const port = 3000;
+
 UserManager.shared();
 UserDetailManager.shared();
 FortuneManager.shared();
@@ -683,6 +683,6 @@ app.post("/auth", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`Listening`);
 });

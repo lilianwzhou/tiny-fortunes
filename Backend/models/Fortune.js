@@ -142,14 +142,14 @@ export class FortuneManager {
             val = +user.userDetails[key] < +bucket.value;
           } else if (bucket.operation === "AFTER") {
             val = +user.userDetails[key] > +bucket.value;
-          } else if (bucket.operation === "!BEFORE IGNORE YEAR") {
+          } else if (bucket.operation === "BEFORE IGNORE YEAR") {
             let userDate = new Date(user.userDetails[key]);
             userDate.setFullYear(2000);
 
             let valDate = new Date(bucket.value);
             valDate.setFullYear(2000);
             val = +userDate < +valDate;
-          } else if (bucket.operation === "!AFTER IGNORE YEAR") {
+          } else if (bucket.operation === "AFTER IGNORE YEAR") {
             let userDate = new Date(user.userDetails[key]);
             userDate.setFullYear(2000);
 
@@ -204,7 +204,7 @@ export class FortuneManager {
       }
     }
 
-    return "No more fortunes";
+    return {message: "No more fortunes"};
   }
 
   async addFortune(body) {

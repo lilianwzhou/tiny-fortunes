@@ -81,7 +81,7 @@ class DateQuestionTableViewCell: UITableViewCell {
             border.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -3)
         ])
         
-        datePicker.addTarget(self, action: #selector(changedDate), for: .editingChanged)
+        datePicker.addTarget(self, action: #selector(changedDate), for: .valueChanged)
     }
     
     private func updateViewFor(info: CellInfo) {

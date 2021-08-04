@@ -13,7 +13,7 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
         CellInfo(keyName: "first_name", prompt: "What is your first name?", cellType: .open(currentValue: nil)),
         CellInfo(keyName: "last_name", prompt: "What is your last name?", cellType: .open(currentValue: nil)),
         CellInfo(keyName: "location", prompt: "Where are you located?", cellType: .dropdown(items: ["San Francisco", "Los Angeles", "New York", "Calgary", "Vancouver", "Waterloo", "Austin"], isExpanded: false, currentSelected: nil)),
-        CellInfo(keyName: "birthday", prompt: "When is your birthday?", cellType: .date(currentDate: nil)),
+        CellInfo(keyName: "birthday", prompt: "When is your birthday?", cellType: .date(currentDate: Date())),
         CellInfo(keyName: "occupation", prompt: "What is your job?", cellType: .dropdown(items: ["Healthcare", "Tech", "Finance", "Social Work", "Other"], isExpanded: false, currentSelected: nil)),
         CellInfo(keyName: "pineapples_on_pizza", prompt: "Do pineapples belong on pizza?", cellType: .boolean(isExpanded: false, currentSelected: nil)),
         CellInfo(keyName: "wipe_standing_up", prompt: "Do you wipe standing or sitting?", cellType: .dropdown(items: ["Sitting", "Standing"], isExpanded: false, currentSelected: nil)),
@@ -131,9 +131,18 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
             let key = cellInfo.keyName
             switch cellInfo.cellType  {
             case .date(let currentDate):
-                if key == "birthday" {
-                    userDetails.birthday = currentDate
+                print(currentDate)
+                guard let currentDate = currentDate else {
+                    continue
                 }
+                
+                if key == "birthday" {
+                    let dateFormatterPrint = DateFormatter()
+                    dateFormatterPrint.dateFormat = "yyyy-MM-dd"
+                    userDetails.birthday = dateFormatterPrint.string(from: currentDate)
+                    print(userDetails.birthday)
+                }
+                
             case .boolean(_, let currentBool):
                 if key == "likes_sushi" {
                     userDetails.likesSushi = currentBool
@@ -246,7 +255,7 @@ extension QuestionsViewController: DropdownQuestionTableViewCellDelegate {
 
 extension QuestionsViewController: DateQuestionTableViewCellDelegate {
     func didSelectDate(date: Date?, row: Int) {
-        guard case .date(let date) = testData[row].cellType else {
+        guard case .date = testData[row].cellType else {
             return
         }
         

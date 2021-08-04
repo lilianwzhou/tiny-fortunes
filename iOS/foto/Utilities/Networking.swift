@@ -13,8 +13,8 @@ struct Networking {
     static var jwt: String?
     static var userID: String?
     
-    static func getRequestFor(route: Route, method: RequestType) -> URLRequest? {
-        let finalURL = baseURL + "/" + route.rawValue
+    static func getRequestFor(route: Route, method: RequestType, tail: String = "") -> URLRequest? {
+        let finalURL = baseURL + "/" + route.rawValue + tail
         
         guard let url = URL(string: finalURL) else {
             return nil
@@ -33,7 +33,7 @@ struct Networking {
     }
     
     enum RequestType: String {
-        case PUT
+        case PATCH
         case GET
         case POST
         case DELETE

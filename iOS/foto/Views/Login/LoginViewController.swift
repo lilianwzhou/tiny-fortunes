@@ -112,8 +112,8 @@ class LoginViewController: UIViewController {
                 Networking.jwt = object.accessToken
                 Networking.userID = object.userID
                 DispatchQueue.main.async {
-                    let questionsVC = QuestionsViewController()
-                    self.navigationController?.pushViewController(questionsVC, animated: true)
+                    let fortuneVC = FortuneViewController()
+                    self.navigationController?.pushViewController(fortuneVC, animated: true)
                 }
             }
             

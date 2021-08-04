@@ -6,6 +6,7 @@ import useToken from "./hooks/useToken";
 import CustomNavBar from "./components/navbar/CustomNavBar";
 import UserList from "./components/users/UserList";
 import CreateFortune from "./components/createFortune/CreateFortune";
+import FortuneList from "./components/fortunes/FortuneList";
 
 function App() {
   const { token, setToken } = useToken();
@@ -22,6 +23,9 @@ function App() {
         <Switch>
           <Route path="/users">
             <UserList token={token}></UserList>
+          </Route>
+          <Route path="/fortunes">
+            <FortuneList token={token}></FortuneList>
           </Route>
           <Route path="/fortune/create">
             <CreateFortune token={token}></CreateFortune>

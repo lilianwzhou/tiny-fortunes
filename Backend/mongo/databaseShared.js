@@ -19,10 +19,12 @@ export class DatabaseManager {
   }
 
   connect() {
-    var mongoDB = "mongodb://127.0.0.1/my_database";
     console.log("Connecting to mongoDB");
     mongoose
-      .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
+      .connect(process.env.MONGO_URL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      })
       .then(() => {
         console.log("MongoDB is connected");
       })

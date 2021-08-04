@@ -125,7 +125,7 @@ app.use(function (req, res, next) {
 });
 
 if (process.env.NODE_ENV === "production") {
-  app.use(auth.requireClientKey);
+  // app.use(auth.requireClientKey);
 }
 
 /**

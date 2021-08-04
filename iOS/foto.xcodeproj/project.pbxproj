@@ -17,8 +17,8 @@
 		E30D6E9926A4E03200BED29F /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D6E9826A4E03200BED29F /* WelcomeViewController.swift */; };
 		E30D6E9B26A4E03A00BED29F /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D6E9A26A4E03A00BED29F /* WelcomeView.swift */; };
 		E30D6E9E26A4EED600BED29F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D6E9D26A4EED600BED29F /* LoginViewController.swift */; };
-		E3A77DD226AFCD47007A8729 /* CreateUserAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A77DD126AFCD47007A8729 /* CreateUserAPIResponse.swift */; };
-		E3A77DD426AFCD6D007A8729 /* AuthAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A77DD326AFCD6D007A8729 /* AuthAPIResponse.swift */; };
+		E324D59E26B748CC005E54C9 /* SubmitViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E324D59D26B748CC005E54C9 /* SubmitViewCell.swift */; };
+		E3A77DD226AFCD47007A8729 /* APIResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A77DD126AFCD47007A8729 /* APIResponses.swift */; };
 		E3A77DD826AFD40E007A8729 /* QuestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A77DD726AFD40E007A8729 /* QuestionsView.swift */; };
 		E3A77DDA26AFD418007A8729 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A77DD926AFD418007A8729 /* QuestionsViewController.swift */; };
 		E3E7158026705B4800CB4796 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E7157F26705B4800CB4796 /* AppDelegate.swift */; };
@@ -45,8 +45,8 @@
 		E30D6E9826A4E03200BED29F /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		E30D6E9A26A4E03A00BED29F /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		E30D6E9D26A4EED600BED29F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		E3A77DD126AFCD47007A8729 /* CreateUserAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserAPIResponse.swift; sourceTree = "<group>"; };
-		E3A77DD326AFCD6D007A8729 /* AuthAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPIResponse.swift; sourceTree = "<group>"; };
+		E324D59D26B748CC005E54C9 /* SubmitViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitViewCell.swift; sourceTree = "<group>"; };
+		E3A77DD126AFCD47007A8729 /* APIResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponses.swift; sourceTree = "<group>"; };
 		E3A77DD726AFD40E007A8729 /* QuestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsView.swift; sourceTree = "<group>"; };
 		E3A77DD926AFD418007A8729 /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
 		E3E7157C26705B4800CB4796 /* foto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = foto.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,8 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				E3095D9126AE497A00BD8869 /* User.swift */,
-				E3A77DD126AFCD47007A8729 /* CreateUserAPIResponse.swift */,
-				E3A77DD326AFCD6D007A8729 /* AuthAPIResponse.swift */,
+				E3A77DD126AFCD47007A8729 /* APIResponses.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -141,6 +140,7 @@
 				E3FD942E26B4B81900D2947F /* OpenQuestionTableViewCell.swift */,
 				E3FD943026B4EF2700D2947F /* DropDownQuestionTableViewCell.swift */,
 				BE367BA726B669AC00986FD6 /* DateQuestionTableViewCell.swift */,
+				E324D59D26B748CC005E54C9 /* SubmitViewCell.swift */,
 			);
 			path = Questions;
 			sourceTree = "<group>";
@@ -295,15 +295,15 @@
 				E3095D9226AE497A00BD8869 /* User.swift in Sources */,
 				E3A77DD826AFD40E007A8729 /* QuestionsView.swift in Sources */,
 				E3095D8D26AD1F2200BD8869 /* UIFont+AppFonts.swift in Sources */,
+				E324D59E26B748CC005E54C9 /* SubmitViewCell.swift in Sources */,
 				E3FD943426B50EAB00D2947F /* FortuneView.swift in Sources */,
 				E30D6E9E26A4EED600BED29F /* LoginViewController.swift in Sources */,
 				E3E7158026705B4800CB4796 /* AppDelegate.swift in Sources */,
-				E3A77DD426AFCD6D007A8729 /* AuthAPIResponse.swift in Sources */,
 				E3E7158226705B4800CB4796 /* SceneDelegate.swift in Sources */,
 				E3A77DDA26AFD418007A8729 /* QuestionsViewController.swift in Sources */,
 				E30D6E9B26A4E03A00BED29F /* WelcomeView.swift in Sources */,
 				E3095D8F26AE437C00BD8869 /* Networking.swift in Sources */,
-				E3A77DD226AFCD47007A8729 /* CreateUserAPIResponse.swift in Sources */,
+				E3A77DD226AFCD47007A8729 /* APIResponses.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

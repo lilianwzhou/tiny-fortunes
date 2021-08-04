@@ -45,7 +45,7 @@ class OpenQuestionTableViewCell: UITableViewCell {
         contentView.addSubview(border)
         
         NSLayoutConstraint.activate([
-            questionLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            questionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             questionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
             questionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
             answerField.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor, constant: 10),

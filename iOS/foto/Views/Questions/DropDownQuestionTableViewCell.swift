@@ -32,7 +32,7 @@ class DropdownQuestionTableViewCell: UITableViewCell {
     
     let stackView: UIStackView = {
         let stack = UIStackView()
-        stack.spacing = 5
+        stack.spacing = 15
         stack.axis = .vertical
         stack.alignment = .center
         stack.distribution = .fill
@@ -48,6 +48,7 @@ class DropdownQuestionTableViewCell: UITableViewCell {
         stack.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
         return stack
     }()
+    
     let border = UIView()
 
     var stackViewHeightAnchor: NSLayoutConstraint?
@@ -82,7 +83,7 @@ class DropdownQuestionTableViewCell: UITableViewCell {
             questionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             questionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
             questionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
-            stackView.topAnchor.constraint(equalTo: questionLabel.bottomAnchor, constant: 15),
+            stackView.topAnchor.constraint(equalTo: questionLabel.bottomAnchor, constant: 20),
             stackView.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: questionLabel.trailingAnchor),
             border.topAnchor.constraint(equalTo: stackView.bottomAnchor),
@@ -214,7 +215,7 @@ struct CellInfo {
 }
 
 enum CellType {
-    case open
+    case open(currentValue: String?)
     case boolean(isExpanded: Bool, currentSelected: Bool?)
     case dropdown(items: [String], isExpanded: Bool, currentSelected: String?)
     case date(currentDate: Date?)
@@ -258,6 +259,8 @@ enum CellType {
             return nil
         case .dropdown(_, _, let c):
             return c
+        case .open(let value):
+            return value
         default:
             return nil
         }

@@ -38,6 +38,18 @@ class FortuneView: UIView {
         return view
     }()
     
+    let messageLabel: UILabel = {
+        let label =  UILabel()
+        label.text = ""
+        label.numberOfLines = 0
+        label.textColor = .black
+        label.font = .appBodyFont
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -45,6 +57,7 @@ class FortuneView: UIView {
         addSubview(header)
         addSubview(profileButton)
         addSubview(cookieImage)
+        addSubview(messageLabel)
         
         NSLayoutConstraint.activate([
             header.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
@@ -54,21 +67,19 @@ class FortuneView: UIView {
             profileButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -75),
             cookieImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             cookieImage.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 30),
-            cookieImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
+            cookieImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            messageLabel.topAnchor.constraint(equalTo: cookieImage.bottomAnchor, constant: 20)
         
         ])
         
         
-        
-        
     }
-    
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     
     

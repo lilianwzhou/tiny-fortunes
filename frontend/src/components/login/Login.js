@@ -6,7 +6,8 @@ import PropTypes from "prop-types";
 
 async function loginUser(credentials) {
   console.log(credentials);
-  return fetch("http://localhost:3000/auth?isAdmin=true", {
+  console.log(process.env.REACT_APP_BASE_URL);
+  return fetch(`${process.env.REACT_APP_BASE_URL}/auth?isAdmin=true`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

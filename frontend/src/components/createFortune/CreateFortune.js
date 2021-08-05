@@ -3,7 +3,7 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 
 async function createFortune(body, token) {
   console.log(body);
-  return fetch("http://localhost:3000/fortune", {
+  return fetch(`${process.env.REACT_APP_BASE_URL}/fortune`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

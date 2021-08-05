@@ -6,7 +6,7 @@ import { CodeBlock, dracula } from "react-code-blocks";
 async function getFortunes(token, searchString) {
   console.log(token);
 
-  let url = "http://localhost:3000/fortunes";
+  let url = `${process.env.REACT_APP_BASE_URL}/fortunes`;
   if (searchString) {
     url = url + "?search=" + searchString;
   }
@@ -22,7 +22,7 @@ async function getFortunes(token, searchString) {
 }
 
 async function deleteFortune(id, token) {
-  let url = `http://localhost:3000/fortune/${id}`;
+  let url = `${process.env.REACT_APP_BASE_URL}/fortune/${id}`;
   return fetch(url, {
     method: "DELETE",
     headers: {

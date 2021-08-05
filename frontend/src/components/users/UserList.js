@@ -6,7 +6,7 @@ import { CodeBlock, dracula } from "react-code-blocks";
 async function getUsers(token, searchString) {
   console.log(token);
 
-  let url = "http://localhost:3000/users";
+  let url = `${process.env.REACT_APP_BASE_URL}/users`;
   if (searchString) {
     url = url + "?search=" + searchString;
   }

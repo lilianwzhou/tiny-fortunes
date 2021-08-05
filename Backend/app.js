@@ -98,9 +98,9 @@ if (process.env.NODE_ENV === "development") {
     )
   );
 
-  // app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+  app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 }
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 if (process.env.NODE_ENV === "production") {
   app.use(morgan("tiny"));
 }

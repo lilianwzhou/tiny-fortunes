@@ -247,7 +247,11 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
             
             DispatchQueue.main.async {
                 let questionsVC = FortuneViewController()
-                self.navigationController?.pushViewController(questionsVC, animated: true)
+                if let nav = self.navigationController {
+                    nav.pushViewController(questionsVC, animated: true)
+                } else {
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
             
         })

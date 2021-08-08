@@ -14,7 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         Networking.jwt = UserDefaults.standard.string(forKey: "jwt")
-        Networking.jwt = UserDefaults.standard.string(forKey: "userID")
+        Networking.userID = UserDefaults.standard.string(forKey: "userID")
+        print(Networking.jwt)
         // Override point for customization after application launch.
         return true
     }

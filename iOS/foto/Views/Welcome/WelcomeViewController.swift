@@ -23,9 +23,6 @@ class WelcomeViewController: UIViewController {
         customView?.createLoginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        customView?.titleLabel.text = "Lol"
-    }
    
     @objc private func createAccount() {
         // TODO: Present createAccountViewController

@@ -21,6 +21,10 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         customView?.createAccountButton.addTarget(self, action: #selector(createAccount), for: .touchUpInside)
         customView?.createLoginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
+        if Networking.jwt != nil {
+            let fortuneVC = FortuneViewController()
+            navigationController?.pushViewController(fortuneVC, animated: true)
+        }
     }
     
    

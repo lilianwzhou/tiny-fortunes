@@ -111,6 +111,9 @@ class LoginViewController: UIViewController {
                 // store ssomewhere? or call the auth endpoint with email and password to get JWT(the auth token to send with user related requests for verification)
                 Networking.jwt = object.accessToken
                 Networking.userID = object.userID
+                UserDefaults.standard.setValue(Networking.jwt, forKey: "jwt")
+                UserDefaults.standard.setValue(Networking.userID, forKey: "userID") 
+
                 DispatchQueue.main.async {
                     let fortuneVC = FortuneViewController()
                     self.navigationController?.pushViewController(fortuneVC, animated: true)

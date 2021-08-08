@@ -8,7 +8,7 @@
 import Foundation
 
 struct Networking {
-    static private let baseURL = "http://localhost:3000"
+    static private let baseURL = "https://tinyfortunes-api.herokuapp.com"
     
     static var jwt: String?
     static var userID: String?

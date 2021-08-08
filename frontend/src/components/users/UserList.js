@@ -21,13 +21,37 @@ async function getUsers(token, searchString) {
   });
 }
 
+async function deleteUser(id, token) {
+  let url = `${process.env.REACT_APP_BASE_URL}/user/${id}`;
+  return fetch(url, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(async (data) => {
+    return data.text();
+  });
+}
+
 export default function UserList({ token }) {
   const [users, setUsers] = useState([]);
-
-  async function search(searchQuery) {
+  const [search, setSearch] = useState("");
+  async function searchFor(searchQuery) {
     let users = await getUsers(token, searchQuery);
+    setSearch(searchQuery);
     setUsers(users);
   }
+
+  async function deleteThing(id, token) {
+    try {
+      await deleteUser(id, token);
+      await searchFor(search);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   useEffect(() => {
     async function userAPICall() {
       let users = await getUsers(token, undefined);
@@ -64,7 +88,14 @@ export default function UserList({ token }) {
                 ></CodeBlock>
 
                 <div></div>
-                <Button variant="danger">Delete</Button>
+                <Button
+                  variant="danger"
+                  onClick={async function () {
+                    await deleteThing(element._id, token);
+                  }}
+                >
+                  Delete
+                </Button>
               </Accordion.Body>
             </Accordion.Item>
           );

@@ -19,7 +19,7 @@ class FortuneViewController: UIViewController {
     
     override func viewDidLoad() {
         customView?.profileButton.addTarget(self, action: #selector(editProfile), for: .touchUpInside)
-    
+        
         
         
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(getFortune))
@@ -34,64 +34,130 @@ class FortuneViewController: UIViewController {
     
     
     @objc private func getFortune() {
-    print("Hi")
-            //API CALL
+        print("Hi")
+        //API CALL
         guard let userID = Networking.userID,
               let jwt = Networking.jwt,
               var request = Networking.getRequestFor(route: .fortune, method: .GET, tail: "/" + userID) else {
+            return
+        }
+        
+        request.allHTTPHeaderFields = ["Content-Type": "application/json", "Authorization": "Bearer \(jwt)"]
+        let dataTask = URLSession.shared.dataTask(with: request, completionHandler: { data, resp, error in
+            
+            if let unwrappedError = error {
+                // At this point, we have an error
+                DispatchQueue.main.async {
+                    self.customView?.messageLabel.text =  unwrappedError.localizedDescription
+                }
                 return
             }
             
+            guard let data = data, let resp = resp as? HTTPURLResponse else {
+                //                DispatchQueue.main.async(execute: {
+                //                    self.customView.showError(message: "Undefined Error")
+                //                })
+                DispatchQueue.main.async {
+                    //self.customView?.showError(message: "Undefined Error")
+                }
+                return
+            }
+            
+            guard resp.statusCode/100 == 2 else {
+                DispatchQueue.main.async {
+                    if let errorMessage = String(data: data, encoding: .utf8) {
+                        self.customView?.messageLabel.text = errorMessage
+                        //                            self.customView?.showError(message: errorMessage)
+                    }
+                }
+                return
+            }
+            
+            if let object = try? JSONDecoder().decode(FortuneAPIResponse.self, from: data) {
+                //print(object.jwt)d
+                DispatchQueue.main.async {
+                    self.customView?.messageLabel.text = object.message
+                    
+                }
+                
+                
+            }
+            
+        })
+        dataTask.resume()
+        
+    }
+    
+    private func getUser(completion: @escaping (Result<FullUser, Error>) -> ()) {
+        print("Hi")
+        //API CALL
+        guard let userID = Networking.userID,
+              let jwt = Networking.jwt,
+              var request = Networking.getRequestFor(route: .user, method: .GET, tail: "/" + userID) else {
+            return
+        }
+        
         request.allHTTPHeaderFields = ["Content-Type": "application/json", "Authorization": "Bearer \(jwt)"]
-            let dataTask = URLSession.shared.dataTask(with: request, completionHandler: { data, resp, error in
-                
-                if let unwrappedError = error {
-                    // At this point, we have an error
-                    DispatchQueue.main.async {
-                        self.customView?.messageLabel.text =  unwrappedError.localizedDescription
-                    }
-                    return
+        let dataTask = URLSession.shared.dataTask(with: request, completionHandler: { data, resp, error in
+            
+            if let unwrappedError = error {
+                // At this point, we have an error
+                DispatchQueue.main.async {
+                    self.customView?.messageLabel.text =  unwrappedError.localizedDescription
                 }
-                
-                guard let data = data, let resp = resp as? HTTPURLResponse else {
-                    //                DispatchQueue.main.async(execute: {
-                    //                    self.customView.showError(message: "Undefined Error")
-                    //                })
-                    DispatchQueue.main.async {
-                        //self.customView?.showError(message: "Undefined Error")
-                    }
-                    return
+                completion(.failure(NSError()))
+                return
+            }
+            
+            guard let data = data, let resp = resp as? HTTPURLResponse else {
+                //                DispatchQueue.main.async(execute: {
+                //                    self.customView.showError(message: "Undefined Error")
+                //                })
+                DispatchQueue.main.async {
+                    //self.customView?.showError(message: "Undefined Error")
                 }
-                
-                guard resp.statusCode/100 == 2 else {
-                    DispatchQueue.main.async {
-                        if let errorMessage = String(data: data, encoding: .utf8) {
-                            self.customView?.messageLabel.text = errorMessage
-//                            self.customView?.showError(message: errorMessage)
-                        }
+                completion(.failure(NSError()))
+                return
+            }
+            
+            guard resp.statusCode/100 == 2 else {
+                completion(.failure(NSError()))
+                DispatchQueue.main.async {
+                    if let errorMessage = String(data: data, encoding: .utf8) {
+                        self.customView?.messageLabel.text = errorMessage
+                        //                            self.customView?.showError(message: errorMessage)
                     }
-                    return
                 }
-                
-                if let object = try? JSONDecoder().decode(FortuneAPIResponse.self, from: data) {
-                    //print(object.jwt)d
-                    DispatchQueue.main.async {
-                        self.customView?.messageLabel.text = object.message
+                return
+            }
+            
+            if let object = try? JSONDecoder().decode(FullUser.self, from: data) {
+                //print(object.jwt)d
+                DispatchQueue.main.async {
+                    completion(.success(object))
 
-                    }
-
-
                 }
-                
-            })
-            dataTask.resume()
+            } else {
+                completion(.failure(NSError()))
+            }
+            
+            
+        })
+        dataTask.resume()
         
     }
     
     @objc private func editProfile() {
-        let questionsVC = QuestionsViewController()
-        present(questionsVC, animated: true, completion: nil)
-        
+        getUser { res in
+            switch res {
+            case .success(let user):
+                let questionsVC = QuestionsViewController()
+                questionsVC.prevDetails = user.userDetails
+                self.present(questionsVC, animated: true, completion: nil)
+            case .failure(let e):
+                print(e.localizedDescription)
+            }
+        }
     }
-
+    
 }

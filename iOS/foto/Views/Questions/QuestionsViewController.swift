@@ -8,7 +8,7 @@
 import UIKit
 
 class QuestionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+    var prevDetails: UserDetails?
     var testData: [CellInfo] = [
         CellInfo(keyName: "first_name", prompt: "What is your first name?", cellType: .open(currentValue: nil)),
         CellInfo(keyName: "last_name", prompt: "What is your last name?", cellType: .open(currentValue: nil)),
@@ -24,7 +24,6 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
         CellInfo(keyName: "early_bird", prompt: "Are you a night owl or an early bird?", cellType: .dropdown(items: ["Night Owl", "Early Bird"], isExpanded: false, currentSelected: nil)),
         CellInfo(keyName: "favourite_colour", prompt: "What is your favourite colour?", cellType: .open(currentValue: nil)),
         CellInfo(keyName: "likes_sushi", prompt: "Do you like sushi?", cellType: .boolean(isExpanded: false, currentSelected: nil))
-        
     ]
     
     var questionsView: QuestionsView {
@@ -45,6 +44,33 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
         questionsView.tableView.register(SubmitViewCell.self, forCellReuseIdentifier: "Submit")
         questionsView.skipButton.addTarget(self, action: #selector(skipQuestions), for: .touchUpInside)
         
+        if let userDetails = prevDetails {
+            let map: [LonLat: String] = [
+                LonLat(37.7749, -122.4194): "San Francisco",
+                LonLat(34.0522, -118.2437): "Los Angeles",
+                LonLat(40.7128, -74.0060): "New York",
+                LonLat(51.0447, -114.0719): "Calgary",
+                LonLat(49.2827, -123.1207): "Vancouver",
+                LonLat(30.2672, -97.7431): "Austin",
+                LonLat(43.4643, -80.5204): "Waterloo"
+            ]
+            testData = [
+                CellInfo(keyName: "first_name", prompt: "What is your first name?", cellType: .open(currentValue: userDetails.firstName)),
+                CellInfo(keyName: "last_name", prompt: "What is your last name?", cellType: .open(currentValue: userDetails.lastName)),
+                CellInfo(keyName: "location", prompt: "Where are you located?", cellType: .dropdown(items: ["San Francisco", "Los Angeles", "New York", "Calgary", "Vancouver", "Waterloo", "Austin"], isExpanded: false, currentSelected: map[LonLat(userDetails.latitude, userDetails.longitude)])),
+                CellInfo(keyName: "birthday", prompt: "When is your birthday?", cellType: .date(currentDate: userDetails.dateBirthday)),
+                CellInfo(keyName: "occupation", prompt: "What is your job?", cellType: .dropdown(items: ["Healthcare", "Tech", "Finance", "Social Work", "Other"], isExpanded: false, currentSelected: userDetails.occupation)),
+                CellInfo(keyName: "pineapples_on_pizza", prompt: "Do pineapples belong on pizza?", cellType: .boolean(isExpanded: false, currentSelected: userDetails.pineapplesOnPizza)),
+                CellInfo(keyName: "wipe_standing_up", prompt: "Do you wipe standing or sitting?", cellType: .dropdown(items: ["Sitting", "Standing"], isExpanded: false, currentSelected: userDetails.wipeStandingUp == true ? "Standing" : (userDetails.wipeStandingUp == false ? "Sitting" : nil))),
+                CellInfo(keyName: "water_wet", prompt: "Is water wet?", cellType: .boolean(isExpanded: false, currentSelected: userDetails.waterWet)),
+                CellInfo(keyName: "dog_person", prompt: "Dogs or cats?", cellType: .dropdown(items: ["Dog", "Cat"], isExpanded: false, currentSelected: userDetails.dogPerson == true ? "Dog" : (userDetails.dogPerson == false ? "Cat" : nil))),
+                CellInfo(keyName: "touch_grass_today", prompt: "Have you touched grass today?", cellType: .boolean(isExpanded: false, currentSelected: userDetails.touchGrassToday)),
+                CellInfo(keyName: "hulk_flavour_sour_apple", prompt: "Hulk? As a flavour?", cellType: .dropdown(items: ["Lime", "Green Apple"], isExpanded: false, currentSelected: userDetails.hulkFlavour == true ? "Green Apple" : (userDetails.hulkFlavour == false ? "Lime" : nil))),
+                CellInfo(keyName: "early_bird", prompt: "Are you a night owl or an early bird?", cellType: .dropdown(items: ["Night Owl", "Early Bird"], isExpanded: false, currentSelected: userDetails.earlyBird == true ? "Early Bird" : (userDetails.earlyBird == false ? "Night Owl" : nil))),
+                CellInfo(keyName: "favourite_colour", prompt: "What is your favourite colour?", cellType: .open(currentValue: userDetails.favouriteColour)),
+                CellInfo(keyName: "likes_sushi", prompt: "Do you like sushi?", cellType: .boolean(isExpanded: false, currentSelected: userDetails.likesSushi))
+            ]
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         

@@ -12,6 +12,20 @@ struct User: Codable {
     let password: String
 }
 
+struct LonLat: Hashable {
+    let lat: Double?
+    let lon: Double?
+    
+    init(_ lat: Double?, _ lon: Double?) {
+        self.lat = lat
+        self.lon = lon
+    }
+}
+struct FullUser: Codable {
+    let email: String
+    let password: String
+    let userDetails: UserDetails
+}
 struct UserDetails: Codable {
     var firstName: String?
     var lastName: String?
@@ -28,6 +42,14 @@ struct UserDetails: Codable {
     var earlyBird: Bool?
     var favouriteColour: String?
     var likesSushi: Bool?
+    var dateBirthday: Date? {
+        guard let birthday = birthday else {
+            return nil
+        }
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd"
+        return dateFormatterGet.date(from: birthday)
+    }
     
     enum CodingKeys: String, CodingKey {
         case firstName = "first_name"

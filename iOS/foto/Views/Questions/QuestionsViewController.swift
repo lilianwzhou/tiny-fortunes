@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol QuestionsViewControllerLogoutDelegate: AnyObject {
+    func logout()
+}
+
 class QuestionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var prevDetails: UserDetails?
     var testData: [CellInfo] = [
@@ -25,6 +29,10 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
         CellInfo(keyName: "favourite_colour", prompt: "What is your favourite colour?", cellType: .open(currentValue: nil)),
         CellInfo(keyName: "likes_sushi", prompt: "Do you like sushi?", cellType: .boolean(isExpanded: false, currentSelected: nil))
     ]
+    
+    var isFromFortuneView = false
+
+    var logoutDelegate: QuestionsViewControllerLogoutDelegate?
     
     var questionsView: QuestionsView {
         return self.view as! QuestionsView
@@ -71,6 +79,25 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
                 CellInfo(keyName: "likes_sushi", prompt: "Do you like sushi?", cellType: .boolean(isExpanded: false, currentSelected: userDetails.likesSushi))
             ]
         }
+        
+        if isFromFortuneView {
+            //
+            let yourAttributes: [NSAttributedString.Key: Any] = [
+                .font: UIFont.appBodyFont,
+                .foregroundColor: UIColor.black,
+                .underlineStyle: NSUnderlineStyle.single.rawValue
+            ]
+            let attributeString = NSMutableAttributedString(
+                   string: "Logout ->",
+                   attributes: yourAttributes
+                )
+            questionsView.skipButton.setAttributedTitle(attributeString, for: .normal)
+        }
+        
+        
+        
+        
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         
@@ -86,6 +113,9 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
         
         guard indexPath.row < testData.count else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Submit") as! SubmitViewCell
+            if isFromFortuneView {
+                cell.submitButton.setImage(UIImage(systemName: "checkmark")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 26, weight: .regular)), for: .normal)
+            }
             cell.submitButton.addTarget(self, action: #selector(submitClicked), for: .touchUpInside)
             return cell
         }
@@ -137,8 +167,13 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     @objc private func skipQuestions() {
-        let fortuneVC = FortuneViewController()
-        navigationController?.pushViewController(fortuneVC, animated: true)
+        if isFromFortuneView {
+            // return to welcome viwe
+            logoutDelegate?.logout()
+        }  else {
+            let fortuneVC = FortuneViewController()
+            navigationController?.pushViewController(fortuneVC, animated: true)
+        }
     }
     
     @objc private func submitClicked() {
@@ -247,10 +282,10 @@ class QuestionsViewController: UIViewController, UITableViewDelegate, UITableVie
             
             DispatchQueue.main.async {
                 let questionsVC = FortuneViewController()
-                if let nav = self.navigationController {
-                    nav.pushViewController(questionsVC, animated: true)
-                } else {
+                if self.isFromFortuneView {
                     self.dismiss(animated: true, completion: nil)
+                } else {
+                    self.navigationController?.pushViewController(questionsVC, animated: true)
                 }
             }
             

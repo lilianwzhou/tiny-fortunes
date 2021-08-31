@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FortuneViewController: UIViewController {
+class FortuneViewController: UIViewController, QuestionsViewControllerLogoutDelegate {
     
     var customView: FortuneView? {
         return self.view as? FortuneView
@@ -152,11 +152,23 @@ class FortuneViewController: UIViewController {
             switch res {
             case .success(let user):
                 let questionsVC = QuestionsViewController()
+                questionsVC.logoutDelegate = self
+                questionsVC.isFromFortuneView = true
                 questionsVC.prevDetails = user.userDetails
                 self.present(questionsVC, animated: true, completion: nil)
             case .failure(let e):
                 print(e.localizedDescription)
             }
+        }
+    }
+    
+    func logout() {
+        Networking.jwt = nil
+        Networking.userID = nil
+        UserDefaults.standard.setValue(Networking.jwt, forKey: "jwt")
+        UserDefaults.standard.setValue(Networking.userID, forKey: "userID")
+        self.dismiss(animated: true) {
+            self.navigationController?.popToRootViewController(animated: true)
         }
     }
     
